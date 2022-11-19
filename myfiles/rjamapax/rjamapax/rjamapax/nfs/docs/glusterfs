@@ -1,0 +1,106 @@
+# GlusterFS install on ubuntu 18.04
+
+# Pre-requisites
+    gluster server1
+    gluster server2
+    gluster client-server
+
+# On all hosts
+   All gluster nodes to your host file
+   Sudo vi /etc/hosts
+   gluster1 IP    <gluster1 name>  
+   gluster2 IP    <gluster2 name>
+
+# SECTION 1 : SERVER-SIDE CONFIGS
+
+    # Update the local package index on each of our gluster servers
+        sudo apt update
+
+    # Install the software-properties-common package on each server machines
+        sudo apt install software-properties-common
+
+    # Add the PPA for the GlusterFS package
+        sudo add-apt-repository ppa:gluster/glusterfs-9
+
+    # Install the GlusterFS server package
+        sudo apt install glusterfs-server
+
+    # You can test this by running following command on each server
+        sudo systemctl start glusterd.service
+        sudo systemctl enable glusterd.service
+        sudo systemctl status glusterd.service  
+
+    # To open up this port to your server machine
+        sudo ufw allow from <server1> to any port 24007
+        sudo ufw deny 24007
+
+    # gluster peer probe-It doesn’t matter which node you use
+        sudo gluster peer probe <server1> 
+
+    # to check gluster peer status
+        sudo gluster peer status
+
+    # Create a directory
+        sudo mkdir </storage-pool>    
+
+
+#  SECTION 2 : CLIENT-SIDE CONFIGS
+
+    # Update the local package index on each of our gluster client
+        sudo apt update
+
+    # install the glusterfs-client package
+        sudo apt install glusterfs-client
+
+    # Install the software-properties-common package on each client machines
+        sudo apt install software-properties-common
+
+    # Add the PPA for the GlusterFS package
+        sudo add-apt-repository ppa:gluster/glusterfs-7
+
+    # You can test this by running following command on client
+        sudo systemctl start glusterd.service
+        sudo systemctl enable glusterd.service
+        sudo systemctl status glusterd.service  
+
+    # Create a directory for mount
+        sudo mkdir </mnt/share>
+
+# SECTION:3  CREATING A STORAGE VOLUME
+        
+    # Note that you can run it from either server1 or server2: 
+        sudo gluster volume create volume1 replica 2 server1:</gluster-storage> <server2>:/gluster-storage force
+
+    # Volume verification
+        sudo gluster volume start <volume-name>
+        sudo gluster volume list
+        sudo gluster volume status
+        sudo gluster volume info
+
+# SECTION 4 : EXECUTION 
+    # your client machine to mount the volume
+        sudo mount -t glusterfs <server1>:</volume1> </storage-pool>
+
+    # display the amount volume
+        df -h
+
+    # Testing Redundancy Features
+        cd </storage-pool>
+        sudo touch <file>
+
+    # to check the server machines
+        ls /gluster-storage    
+
+# SUMMARY
+
+  # Section 1: 
+    Server side configuration -Done 
+
+  # Section 2:
+    Client side configuration -Done 
+
+  # Section 3:
+    Creationg a storage volume -Done
+
+  # Section 4:
+    Execution -Pending       

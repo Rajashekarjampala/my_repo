@@ -1,0 +1,57 @@
+COMMANDS:
+*********
+RKE COMMANDS:
+
+1. /.rke remove --force 
+2. /.rke up 
+3. cp kube_config_cluster.yml  /home/vudeadmin/.kube/config 
+4. cp ~/.kube/config ~/.kube/config
+-----------------------------------------------------------
+
+CREATE USER:
+
+sudo su
+sudo userdel vudeadmin
+sudo rm -rf /home/vudeadmin/
+sudo useradd --shell /bin/bash -m -d /home/vudeadmin vudeadmin;
+sudo usermod -aG sudo vudeadmin;
+echo 'vudeadmin:vudeadmin' | sudo chpasswd;
+sudo mkdir -p /home/vudeadmin;
+sudo rm -rf /home/vudeadmin/.ssh;
+sudo mkdir /home/vudeadmin/.ssh;
+echo vude | sudo ssh-keygen -C "" -P "" -f /home/vudeadmin/.ssh/id_rsa -q
+echo vude | sudo -S chown -R vudeadmin /home/vudeadmin/.ssh
+------------------------
+sudo useradd --shell /bin/bash -m -d /home/vudemaster vudemaster;
+sudo usermod -aG sudo vudemaster;
+echo 'vudemaster:vudemaster' | sudo -S chpasswd;
+sudo mkdir -p /home/vudemaster;
+sudo rm -rf /home/vudemaster/.ssh;
+sudo mkdir /home/vudemaster/.ssh;
+ssh-keygen
+echo vudemaster | sudo -S chown -R vudemaster /home/vudemaster/.ssh
+--------------------------------------------------------
+TAINT:
+
+kubectl describe node <node-name> | grep Taints 
+kubectl taint nodes <node-name> key1=value1:NoSchedule   
+kubectl describe node <node-name> |grep    
+kubectl taint nodes <name-name> <key-name>:NoSchedule-
+--------------------------------------------------------
+Git commands:
+************
+git config --global http.proxy http[s]://Rajashekarjampala:Shekar%409%40@proxy.elements.local:911
+
+ls
+git branch     #op-main
+git status     #op-python
+git add python
+git commit -m "git commit is done"
+git push origin main
+
+---------------------------------------------------------------------------------------
+VM Key lock document
+********************
+https://phoenixnap.com/kb/fix-could-not-get-lock-error-ubuntu
+
+------------------------------------------------

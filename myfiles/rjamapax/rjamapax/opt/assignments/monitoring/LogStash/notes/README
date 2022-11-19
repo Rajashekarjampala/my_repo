@@ -1,0 +1,206 @@
+LogStash
+********
+
+# What is LogStash and its Applications :
+  - Logstash is an open-source data ingestion tool that allows you to collect data from a variety of sources
+  - To  transform it, and send it to your desired destination.
+  - Logstash is an open-source analytics and search engine.
+  - With pre-built filters and support for over 200 plugins.
+  - Logstash is Collect logs and events data. It even parses and transforms data
+  - Logstash allows users to easily ingest data regardless of the data source
+  
+# AIM :
+  - Logstash gathers all types of data from the different source and makes it available for further use.
+  
+# DEFINATION OF DONE :
+
+
+# PRE-REQUISITES :  
+    1. kubernetes-cluster
+    2. Docker
+    
+# STAGES :
+    STAGE 1 :
+
+        STEP 1 :
+            Create A Namespace :
+                - First, we will create a Kubernetes namespace for Logstash
+
+                - Execute the following command to create a new namespace 
+                    kubectl create namespace << namespace-name >>
+
+                - following below command to check namespace create or not
+                    kubectl get ns
+
+    STAGE 2 : 
+        Installation using Kubernetes :
+
+        STEP 1 :
+            Create A Logstash Deployment :
+                - Create a file for Logstash deployment
+
+        STEP 2 :
+            Configuration file for the Logstash server Explanation :
+
+                - Apiversion -> Based on our resource type - v1
+                - Kind -> Kind is nothing but our resource type like - Deployment
+                - Metadata -> Information about our resources
+                - Lable -> This is matching only thing like pod, service,deployment
+                - Spec -> Then specification about out pod like image, name, port   
+
+        STEP 3 :
+            Create a deployment on Logstash namespace using the above file :
+                - kubectl create -f << Dep.yml>> -n << namespace >>
+
+            You can check the created deployment using the following command : 
+                - kubectl get deployments -n << namespace >>
+
+        STEP 4 : 
+            Create a Logstash Service :
+                - Create a file for prometheus deployment
+
+        STEP 5 :
+            Create a service on Logstash namespace using the above file :
+                - kubectl create -f << svc.yml>> -n << namespace >>
+
+            You can check the created service using the following command : 
+                - kubectl get svc -n << namespace >>  
+
+        STEP 6 :
+            Once created nodeport service, you can access the Logstash dashboard using any Kubernetes node IP.
+                << VM-IP >> : << NodePort >>
+                - Navigate to http://localhost:<< PORT-NUMBER >> to access the Logstash UI:
+
+# Create Specifications file for Logstash :
+
+- Deployment yml file for LogStash :
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-configmap
+  namespace: logstash
+data:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/pipeline
+  logstash.conf: |
+    # all input will come from filebeat, no local logs
+    input {
+      beats {
+        port => 5044
+      }
+    }
+    filter {
+      if [message] =~ /^\{.*\}$/ {
+        json {
+          source => "message"
+        }
+      }
+      if [ClientHost] {
+        geoip {
+          source => "ClientHost"
+        }
+      }
+    }
+    output {
+        elasticsearch {
+            hosts => [ "http://10.74.190.127:31830/" ]
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash-deployment
+  namespace: logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:6.5.4
+        ports:
+        - containerPort: 5044
+        volumeMounts:
+          - name: config-volume
+            mountPath: /usr/share/logstash/config
+          - name: logstash-pipeline-volume
+            mountPath: /usr/share/logstash/pipeline
+      volumes:
+      - name: config-volume
+        configMap:
+          name: logstash-configmap
+          items:
+            - key: logstash.yml
+              path: logstash.yml
+      - name: logstash-pipeline-volume
+        configMap:
+          name: logstash-configmap
+          items:
+            - key: logstash.conf
+              path: logstash.conf
+
+
+
+- Service yml file for Logstash :
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: logstash
+  name: lodstash-service
+  labels:
+    name: logstash
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      nodePort: 30036
+      name: logstash
+  selector:
+    name: logstash
+
+# Automation for Logstash Deployment and Service :
+
+function deployment() {
+   echo "Bring up Deployment => START"
+   kubectl apply -f /opt/vude/assignments/monitoring/Logstash/specs/deployments/start.yml
+   echo "Deployment ACTIVE => DONE"  
+}
+
+function svcs() {
+   echo "Bring up Service => START"
+   kubectl apply -f /opt/vude/assignments/monitoring/Logstash/specs/svc/start.yml
+   echo "Service ACTIVE  => DONE"
+}
+
+
+function main() {
+#  namespace $1
+  deployment
+  svcs
+}
+
+# Arguments :: $1 = namespace
+main $1
+
+# VERIFICATIONS :
+    1. Create LogStash Deployment - Not Done
+    2. Create LogStash Service - Not Done
+    3. Access the LogStash UI - Not Done
+
+# REFERENCE :
+  - https://coralogix.com/blog/elasticsearch-logstash-kibana-on-kubernetes/
+  - https://towardsdatascience.com/the-basics-of-deploying-logstash-pipelines-to-kubernetes-94a470ad34d9
+  - https://alexander.holbreich.org/logstash-kubernetes/
+  - https://www.youtube.com/watch?v=b4wOV6vlqPU
+  - https://github.com/DeekshithSN/kubernetes/blob/master/monitoring/kubernetes-elk/logstash-deployment.yaml
+  - https://www.deepnetwork.com/blog/2020/01/27/ELK-stack-filebeat-k8s-deployment.html

@@ -1,0 +1,32 @@
+1.
+Solution Steps:
+1. From the list, checking for number is greater than Or equals to 2
+2. checking prime numbers from the list
+2. Iterate the list and add to the new list
+3. Return the prime list.'''
+--------------------------------
+2.
+Solution Steps:
+1. First iterate the list
+2. Cheking for removed element is great than sum of remaing elements in the list   
+3. Return greatest number in the list      
+---------------------------------
+3.
+Solution Steps:
+1. First iterate the list
+2. Cheking for removed element is great than product of remaing elements in the list   
+3. checking for number is greater than of product of remaining numbers in the list
+3. Return greatest number in the list              
+---------------------------------
+4.
+Solution Steps:
+1. Take two lists and iterate both list using zip
+2. From the list pick the comman elelments in both lists
+3. To check the condition filter values are divisilble 
+4. Return the list     
+------------------------------------------
+5.
+Solution Steps:
+1. From the dictionary to Iterate the keys and values
+2. To check the condition for items divisible by numberX
+3. Return the new dictionary.'''  

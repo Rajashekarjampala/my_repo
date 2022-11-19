@@ -1,0 +1,9 @@
+#variable
+variable nothing but its acontainer
+it can be store data inside them
+
+#system define variable
+its create and define and maintain by system/os
+
+#user define variable
+ its create and define and maintain by user

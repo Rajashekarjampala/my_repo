@@ -1,0 +1,1664 @@
+SET-10
+******
+
+'''
+1. Write a function to take 2 lists and an integer numX. 
+   Use zip function to iterate the list.
+   Pick values if 
+   		:they are common at both indexes AND 
+   		:they ARE be divisible by numX. 
+   *** Note: You must iterate the lists only if the lengths of the lists are equal. *** 
+   
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=10
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : []
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[100,20,300,40,50,60,100]
+		numX=20
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [100,20,300,40,50,60,100]
+
+	Example :
+		listA=[100,21,300,41,50,63,100]
+		listB=[100,21,300,41,50,63,100]
+		numX=10
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [100,300,50,100]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: New list with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the orginal lists Using zip function
+    Check the comman elements in both indexes in listA and listB
+    Check the comman value is divisible by numberX
+        If yes:
+            Add to new list
+        else:
+            continue the loop
+    Finally return the new list
+'''
+
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Define the empty list
+    new_list=[]
+    # Iterate the both list by using zip function
+    for listA,listB in zip(org_list1,org_list2):
+        #To check the condition value is same in both org_list1,org_list2
+        if (listA==listB):
+            # checking for condition comman number in lists divisible by numx
+            if (listA%numx==0 and listB%numx==0):
+                # result is added to the new list
+                new_list.append(listA)
+    # Finally return the new list            
+    return new_list
+
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],10)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100],[100,20,300,40,50,60,100],20)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,21,300,41,50,63,100],[100,21,300,41,50,63,100],10)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+'''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+
+                '''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+
+'''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+'''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+
+                '''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+
+                '''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+
+'''
+
+4. Write a function to take 2 lists and an integer X. 
+	From the listA find all elements that are >er numX. Append those elements to listB.
+	Remove all duplicates from listB.
+	Finally return listB.
+   -------------------------------------------------------------------------------------
+
+	Example :
+		listA=[100,20,300,40,50,60,100]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=100
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,300]
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,1000]
+		numX=150
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,1000,200,300]
+
+
+	Example :
+		listA=[100,20,300,40,50,60,100,200]
+		listB=[1100,20,1300,40,50,160,250]
+		numX=250
+		result=func_exec(listA,listB)
+		print(result)
+		Expected Output : [1100,20,1300,40,50,160,250]
+
+        :param org_lists: Original lists (ListA,ListB) passed by the User
+        :param numx: Numberx passed by the User. Type is INT.
+        :return: return list2 with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate the original list1
+    Check If the original list number is greater than numberx
+    Append those elements to original list2 
+    Remove duplicate from list2 
+    Finally return the original list2
+'''
+# Define the function
+def check_num(org_list1,org_list2,numx):
+    # Iterate the original list1
+    for i in org_list1:
+        # check number is greater numx presence in original list1
+        if (i>numx):
+            # remove the duplicate in original list2
+            if ( i not in org_list2):
+                # Original list1 element add to the original list2
+                org_list2.append(i)                   
+    # Finally return the original list2                
+    return org_list2
+# Execution
+#calling function
+#Testcase 1
+result=check_num([100,20,300,40,50,60,100],[1100,20,1300,40,50,160,1000],100)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,1000],150)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_num([100,20,300,40,50,60,100,200],[1100,20,1300,40,50,160,250],250)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_num([1,10,8,7,4,3,6,2,9,5],[32,12,8,23,27,3,62,32,21,5],5)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_num([1000,800,300,500,700,100,600,400,900],[77,42,67,500,787,100,672,48,900],100)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_num([21,34,57,87,54,32,23,29,55,80],[21,13,72,87,54,43,78,90,55,88],500)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_num([90,100,98,93,95,91,96,92,97,99],[76,42,67,66,34,59,42,57,63,48],4)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_num([1,100,300,800,50,39,75,67,894],[1,88,76,82,35,39,75,79,86],5)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_num([25,45,65,75,95,105,25,15,85],[14,35,75,88,95,78,25,71,85],3)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_num([121,22,456,2337,980,432,666,77,9],[34,75,78,64,980,463,777,72,48],143)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#    
+
+'''
+3. Write a function to take a list argument. Find the element that has greatest length.
+
+	Example :
+		listA=["hello","world","science","maths","Python"]
+		result=func_exec(listA)
+		print(result)
+		Expected Output : ["science"]
+		Reason: length of science -> 7
+
+	Example :
+		listA=["hello","world","science","maths","Pythonics"]
+		result=func_exec(listA)
+		print(result)
+		Expected Output : ["Pythonics"]
+		Reason: length of Pythonics -> 9
+
+		:param org_list: Original list passed by the User
+        :return: New list with filtered values ONLY.  
+
+    Solution Steps:  
+    **************
+    Take original list and iterate
+        Store sizes of words in a list 
+        checking if the word size is greater than remaining words
+        if yes:
+            add to new list
+        else:
+            continue loop
+	Finally return the greater length lenth of list					
+'''
+# Define function
+def check_word(org_list):
+	# Maximun length is start from 0 
+    max_len=0
+	# Iterate the original list
+    for i in org_list:
+		# Check condition for length of the list is greater than 0
+        if (len(i)>max_len):
+			# max length of element from the list
+            max_len=len(i)
+			# result is Assign to variable 
+            gre_len=i
+	# Finally retyrn the greatest length word from list			
+    return gre_len        
+            
+#calling function  
+#Testcase 1
+result=check_word(["hello","world","science","maths","Python"])
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_word(["hello","world","science","maths","Pythonics"])
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_word(["hello","world","today","comming"])
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_word(["prashanth","shekar","sravan","goutham","prasad","sraavi"])
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_word(["airtel","vodafone","idea","jio","bsnl","mahesh"])
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_word(["india","srilanka","america","south africa","afganisthan"])
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_word(["cat","dog","elephant","fox","rabbit"])
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_word(["hyderabad","miyapur","kukatpally_vvnagr","sangareddy","patancheru"])
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_word(["mobile","laptop","redmi","realme","vivo","nokiamobile"])
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_word(["book","pen","pencile","niddle","writtingstory"])
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+
+'''
+6. Write a function to take a dict as argument. 
+   If the dict-val is the divisible bydict-key then filter, add to new dict.
+   Finally return the new dict.
+
+	Example : 
+			testDict={10:20, 3:30, 4:16,90:100,20:30,11:23,17:44,20:400}
+			result=func_exec(testDict)
+			print(result)
+			Expected Output : {10:20,3:30,4:16,20:400}
+			Reason: 
+				20 is divisible by 10
+				30 is divisible by 3
+				16 is divisible by 4
+				400 is divisible by 20
+            :param org_dic: Original dictionary passed by the User
+            :return: New list with filtered values ONLY.  
+
+Solution Steps:
+**************
+Iterate Original dictionary of keys and values
+Check if condition is  dict-val is the divisible by dict-key 
+  If Yes:
+    add to new dictionary
+  else:
+    continue loop
+Finally return the new dictionary                          
+'''
+# Define the function
+def check_div (org_dic):
+    # Define the empty dictionary
+    new_dic={}
+    # Iterate the dictionary key(i) and value(j) 
+    for i,j in org_dic.items():
+        # Check the condition for dict-val is the divisible by dict-key  
+        if (j%i==0):
+            # update the new dictionary
+            new_dic[i]=j
+    # Finally return the new dictionary        
+    return new_dic
+
+# Execution
+#calling function
+#Testcase 1
+result=check_div({10:20, 3:30, 4:16,90:100,20:30,11:23,17:44,20:400})
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_div({22:44,5:3,33:11,4:8,9:4,77:22})
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_div({32:3,42:5,75:3,83:13,63:75,61:23})
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_div({3:2,40:10,45:31,72:73,52:31,55:30})
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_div({3:5,4:3,5:8,9:5,9:2,12:17})
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_div({42:21,57:31,75:31,73:36,83:31,9:12})
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_div({12:21,16:61,14:41,17:34,13:31,68:51})
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_div({21:42,6:7,4:5,7:8,5:6,3:4})
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_div({9:5,8:4,7:3,6:2,5:1,10:7})
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_div({180:810,17:71,19:91,270:720,22:22,32:23})
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#          
+
+SET-9
+*****
+
+'''
+       1. Write a function to take a number numX followed by any number of integer arguments.
+       You need to find all numbers divisible by numX 
+       Filter all the numbers from the list that are divisible numX and add to new list.
+       Finally return the new list.
+       Note: You must use *args in your function implementation
+      *******************
+    Example :
+        numX=20
+        result=func_exec(numX,20,40,50,60,80,90,100,70)
+        print(result)
+        Expected Output : [20,40,60,80,100]
+    Example :
+        numX=25
+        result=func_exec(numX,50,60,80,90,100,70)
+        print(result)
+        Expected Output : [50,100]
+    Example :
+        numX=7
+        result=func_exec(numX,20,40,50,70)
+        print(result)
+        Expected Output : [70]
+        
+        :param numx: Numberx passed by the User. Type is INT.
+        :param integers: number of integer arguments passed by the user        
+        :return: New list with filtered values ONLY.  
+        
+    Solution Steps:
+    **************
+    Define function
+    Pass number X and few integers using *args
+    Iterates numbers *args varaible:
+        Checking for divisibility integers by number X
+        if Yes:
+            add to new list
+        else:
+            continue loop
+    finally return new list       
+'''
+#define function
+def check_div(numX,*numbers):
+    #define empty list
+    new_list=[]
+    #iterates numbers by *args argument
+    for i in numbers:
+        #checking for divisibility of numx and numbers
+        if(i%numX==0):
+            #adding to new list
+            new_list.append(i)
+    #finally return list       
+    return new_list 
+
+#calling function
+#Testcase 1
+result=check_div(20,20,40,50,60,80,90,100,70)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_div(25,50,60,80,90,100,70)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_div(7,20,40,50,70)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_div(8,2,3,4,5,6,7,8,9,10)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_div(100,100,200,300,400,500,600,700,800,900,1000)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_div(50,21,22,23,24,25,26,27,28,29,30)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_div(10,90,91,92,93,94,95,96,97,98,99,100)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_div(22,11,22,33,44,55,66,77,88,99,100)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_div(25,35,45,55,65,75,85,95,105,115)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_div(121,221,321,421,521,621,721,821,921)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+
+'''
+    2. Write a function to take a number numX, numY followed by any number of integer arguments.
+    You need to find all numbers divisible by numX and numY
+    Filter all the numbers from the list that are divisible numX and numY and add to new list.
+    Finally return the new list.
+    Note: You must use *args in your function implementation
+    *******************
+    Example :
+        numX=20
+        numY=10
+        result=func_exec(numX,20,40,50,60,80,90,100,70)
+        print(result)
+        Expected Output : [20,40,60,80,100]
+    Example :
+        numX=25
+        numY=5        
+        result=func_exec(numX,50,60,80,90,100,70)
+        print(result)
+        Expected Output : [50,100]
+    Example :
+        numX=7
+        numY=12        
+        result=func_exec(numX,20,40,50,70)
+        print(result)
+        Expected Output : []
+
+        :param numX: NumberX passed by the User. Type is INT.
+        :param numY: NumberY passed by the User. Type is INT.
+        :param integers: number of integer arguments passed by the user        
+        :return: New list with filtered values ONLY. 
+        
+    Solution Steps :
+    **************
+    Define function
+    Pass number X,Y and few integers using *args
+    Iterates numbers *args varaible:
+        Checking for divisibility integers by numberX and numberY
+        if Yes:
+            add to new list
+        else:
+            continue loop
+    finally return new list         
+'''
+#define function
+def check_div(numX,numY,*numbers):
+    #define new list
+    new_list=[]
+    #Iterates numbers by using *args
+    for i in numbers:
+        #checking divisibility of number with number X and number Y
+        if(i%numX==0 and i%numY==0):
+            #adding to new list
+            new_list.append(i)
+    #Finally return new list        
+    return new_list        
+
+#calling function
+#Testcase 1
+result=check_div(20,10,20,40,50,60,80,90,100,70)
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_div(25,5,50,60,80,90,100,70)
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_div(7,12,20,40,50,70)
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_div(8,2,3,4,5,6,7,8,9,10)
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_div(100,100,200,300,400,500,600,700,800,900,1000)
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_div(50,21,22,23,24,25,26,27,28,29,30)
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_div(10,90,91,92,93,94,95,96,97,98,99,100)
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_div(22,11,22,33,44,55,66,77,88,99,100)
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_div(25,35,45,55,65,75,85,95,105,115)
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_div(121,221,321,421,521,621,721,821,921)
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#'''
+
+                
+
+

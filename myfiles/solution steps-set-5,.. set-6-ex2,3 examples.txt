@@ -1,0 +1,278 @@
+SET-5 --> Solution Steps
+*************************
+
+'''
+1. Write a function to take a list. Reverse and return the new list.
+    Example :
+        listA=[10,20,30,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [100,60,50,40,30,20,10]
+        :param org_list: Original list passed by the User
+        :return: return new list with org_list arg
+
+Solution Steps:
+**************
+Define the the function  
+  We can take one empty list
+  Iterate the original list 
+  Reverse the Ogiginal list 
+  Reversed list is add to the empty list 
+  Return the empty list 
+Print the empty list
+'''
+--------------------------------
+'''
+2. Write a function to take a list. Sort and return the new list.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [20,40,50,60,100,100,300]
+        :param org_list: Original list passed by the User
+        :return: New list with filtered values ONLY
+Solution Steps:
+**************
+Define the the function 
+  We can take one empty list
+  Iterate the original list 
+  Sort the Ogiginal list 
+  Sorted list is add to the empty list 
+  Return the empty list 
+print empty list    
+'''    
+---------------------------------
+'''
+3. Write a function to take 2 lists. Use zip function to iterate the list and pick values that
+   are common at both indexes.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        listB=[1100,20,1300,40,50,160,1000]
+        result=func_exec(listA,listB)
+        print(result)
+        # 20 -> listA[1] == listB[1]
+        # 40 -> listA[3] == listB[3]
+        # 50 -> listA[4] == listB[4]
+        Expected Output : [20,40,50]
+        :param org_list: Original list(org_listA, org_listB) passed by the User
+        :return: New list with filtered values ONLY
+Solution Steps:
+**************
+Define the the function 
+  We can take one empty list
+  Iterate the original lists by using zip 
+  Check the comman elements in both lists list 
+  Comman elements are add to the empty list 
+  Return the empty list 
+print empty list             
+'''      
+---------------------------------
+'''
+4. Write a function to take a dict as argument. Sort the dict by keys and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,3:4,4:7,12:9,20:3,60:11}
+            :param org_dic: Original dictionary passed by the User
+            :return: New dic with filtered values ONLY
+Solution Steps:
+**************
+Define the the function 
+  We can take one empty dictionary
+  Iterate the original dictionary 
+  Sort the dictionary keys
+  Sorted keys are add to the empty dictionary 
+  Return the empty dictionary 
+Print empty dictionary          
+'''
+------------------------------------------
+'''
+5. Write a function to take a dict as argument. Sort the dict by values and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:40,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,4:7,12:9,60:11,10:20,3:40}
+            :param org_dic: Original dictionary passed by the User
+            :return: New dic with filtered values ONLY
+Solution Steps:
+**************
+Define the the function 
+  We can take one empty dictionary
+  Sort the dictionary value and store in variable
+  Iterate the original dictionary
+  Sorted values are add to the empty dictionary 
+  Return the empty dictionary 
+Print empty dictionary               
+'''
+------------------------------------------------------
+------------------------------------------------------
+SET-6, EX-2 --> Examples
+************************
+# Execution
+#Testcase 1
+result=check_greater([4,6,20,3,5])
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_greater([5,10,6,4,25])
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_greater([10,15,5,3,35])
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_greater([5,9,1,25,8])
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_greater([5,3,7,20,10])
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_greater([20,10,60,150,40])
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_greater([50,20,60,120,140])
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_greater([5,10,15,30,10])
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_greater([5,10,6,4,26])
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_greater([10,20,15,5,603])
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+------------------------------------------------------------------------
+SET-6 Ex-3 Examples
+*******************
+# Examples            
+#Testcase 1
+result=check_greater([1,3,35,5,2])
+print("\n")
+print('Testcase 1 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 2
+result=check_greater([2,1,25,2,3])
+print("\n")
+print('Testcase 2 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 3
+result=check_greater([2,3,1,5,45,2])
+print("\n")
+print('Testcase 3 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 4
+result=check_greater([3,5,50,1,3])
+print("\n")
+print('Testcase 4 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#Testcase 5
+result=check_greater([4,5,3,80,1])
+print("\n")
+print('Testcase 5 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+#TestCase 6
+result=check_greater([5,2,45,2,2])
+print("\n")
+print('Testcase 6 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 7
+result=check_greater([20,2,5,650,3])
+print("\n")
+print('Testcase 7 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 8
+result=check_greater([5,3,4,90,1])
+print("\n")
+print('Testcase 8 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 9
+result=check_greater([2,5,6,100,5])
+print("\n")
+print('Testcase 9 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+# TestCase 10
+result=check_greater([1,5,10,2,110])
+print("\n")
+print('Testcase 10 Output : {}'.format(result))
+print("\n")
+print("-"*50)
+print("\n")
+# ------------------------------------------------------------------#
+

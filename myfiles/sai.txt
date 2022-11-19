@@ -1,0 +1,87 @@
+# How to Connecting to the MongoDB Server and Creating a Collection ?
+    - In this step, you will use the PyMongo library to create a client 
+      you will use to interact with your MongoDB server
+    - create a database, and then create a collection to store your application.
+    - This file will import the necessary class and helpers from Flask and the PyMongo library
+
+    - we have to create a file for python script
+        vi app.py
+
+    - Below code is using for Connecting to the MongoDB Server and Creating a Collection    
+
+    -   from flask import Flask
+        from pymongo import MongoClient
+
+        app = Flask(__name__)
+
+        client = MongoClient('localhost', 27017)
+
+        db = client.flask_db
+        todos = db.todos
+
+    - Save and close the file 
+
+# How to Create MongoDB cluster ?
+    - Create MongoDB cluster :
+    - Login to MongoDB and go to Atlas. Click on Build a cluster.
+    - Under shared clusters, click on create a cluster.
+    - Click on create cluster button.Wait till the cluster is being created.
+    - MongoDB will create three replicas of the database for the high availability of the data
+    - And provide fault tolerance.
+
+# How to Create a database user for MongoDB ?
+    - Click on Database Access from the options in the left pane. 
+    - Now, click on Add New Database User button.
+    - I will be selecting the authentication method as a Password.
+    - Enter the username and I will generate a password by clicking the Autogenerate Secure Password
+    - This will generate a secure password.
+    - This passowrd is very important and if you lose it, you will not be able access this database later
+    - Click on Add User button. This will add a new user, in my case.
+    
+# How to Get a URL for connecting to the MongoDB cluster ?
+    - Click on the Clusters option from the left pane.
+    - Now, in the cluster sandbox, click on CONNECT button. 
+    - This will open up one pop-up window. Select Connect your application option.
+    - Select Python as a driver and appropriate version of python.
+    - Copy the connection URL and replace <password> with the password of the admin
+    - User that we have created a pass word in the previous step.   
+    - Now, we have the MongoDB database ready to use.
+    - Let’s create a Flask application for using this MongoDB database.
+
+# How to  Creating a Flask application ?
+    - For integrating MongoDB with Python, we required a MongoDB driver.    
+
+    - Install pymongo using the following command
+        pip install pymongo
+
+    - Also, we are using MongoDB URL to connect to the MongoDB database is in mongodb+srv format.
+
+    - We required the dnspython package to be installed for using this URL.
+        pip install dnspython    
+
+    - Here, we will establish the connection to MongoDB with the help of the MongoClient method.
+    - The mongopass variable is the variable that contains the MongoDB connection URL with a password
+
+        from flask import Flask
+        from flask import request
+        import pymongo
+        from pymongo import MongoClient
+        import json
+        from bson import json_util
+
+        app = Flask(__name__)
+
+        cluster = MongoClient("mongodb+srv://<ID>:<PWD>@cluster0-v9cc8.mongodb.net/test?retryWrites=true&w=majority")
+        db  = cluster["super_market"]
+        collection = db["vegitables"]
+
+# How to Run the application and test the functionalities ?
+    -         
+
+
+     
+
+
+
+
+    

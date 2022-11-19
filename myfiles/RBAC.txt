@@ -1,0 +1,119 @@
+# AIM :
+  # RBAC is an authorization mechanism that enables fine-grained access for users and applications 
+  # Interacting with Kubernetes objects in a cluster
+
+  # Provide access to single user for pod (read-only access)
+
+# STEP 1 :
+- Creating a User:
+  # Kubernetes can authenticate and authorize users with CRT
+  # To configure access for the Kubernetes cluster, a client certificate file (.crt) and private key (.key)
+    kubectl config set-credentials <user> --client-certificate=<user>.crt --client-key=<user>.key
+
+  # Set a context element for the created user to check its access privileges for a Kubernetes cluster.
+  # To set a context entry in kubeconfig, use this command:
+    kubectl config set-context <user>-context --cluster=local --user=<user>
+
+  # Switch to user1-context using this command:
+    kubectl config use-context <user>-context
+
+# STEP 2 : 
+- Creating a Service Account:  
+  # Service accounts in Kubernetes are used for identity authentication and authorization by pods.
+    kubectl create serviceaccount <sa-name>
+
+  # You can also list Service Account resources in the namespace
+    kubectl get serviceaccounts
+    
+  # To describe the service account 
+    kubectl describe serviveaccount <sa-name>  
+
+# STEP 3 :
+- Creating a Role:
+  # The configuration is expressed as a YAML file
+  
+  kind: 
+  apiVersion: 
+  metadata:
+    namespace: 
+    name: 
+  rules:
+    apiGroups: 
+    resources: 
+    verbs: 
+
+  # kind: this specifies the kind of role. 
+  # namespace: this specifies the namespace to which a role is bound
+  # apiGroups: this indicates the core API groups used.
+  # resources: these are the resources that a user wants to access.
+  # Examples include pods, deployments, services, namespaces, or ConfigMaps
+  # verbs: subject can execute on resources, including list, delete, create, watch, update, or edit.
+
+# STEP 4 :
+- Creating a RoleBinding:
+  # A RoleBinding object configuration file would look similar to this:
+
+  apiVersion:
+  kind: 
+  metadata:
+    name: 
+    namespace: 
+  subjects:
+    kind:  
+    name: 
+    apiGroup: 
+  roleRef:
+    kind: 
+    name: 
+    apiGroup: 
+
+  # subjects:
+  # kind: User Here ServiceAccounts can also be specified instead of user
+  # name: "name" is case sensitive. Specify the name of the user
+  # roleRef:
+  # kind: this must be Role or ClusterRole  
+  # name: this must match the name of the Role you wish to bind to
+
+# STEP 5 :
+- Apply the RBAC Settings:
+  # Create the RBAC role by using the following command:
+    kubectl create -f <Role.yaml file>
+
+  # Create the RBAC role binding by using the following command:
+    kubectl create -f <role-binding yaml file>  
+
+  # Now you have created a user with limited permissions in your cluster.
+    kubectl --context=employee-context get pods --namespace=rjamapax  
+
+# EXAMPLES :   
+  # Example 1:
+  # Create and configuration of role yml file
+
+  # Role.yml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    namespace: rjamapax
+    name: get-pods
+  rules:
+    apiGroups: [""] 
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"] 
+
+  # Example 2 :
+  # Create and configuration of role-binding yml file
+
+  # Role-binding.yml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: user-get-pods
+    namespace: rjamapax
+  subjects:
+    kind: User 
+    name: user1 
+    apiGroup: rbac.authorization.k8s.io
+  roleRef:
+    kind: Role
+    name: get-pods  
+    apiGroup: rbac.authorization.k8s.io  

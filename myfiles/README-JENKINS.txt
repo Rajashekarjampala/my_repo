@@ -1,0 +1,474 @@
+
+
+# AIM :
+    CI/CD Automation ~ Using Kubernetes build agents for Jenkins
+
+# PRE-REQUISITES:    
+    - Kubernetes cluster
+    - Docker
+    - Jenkins server
+    - SCM Tool- Bitbucket
+    - Java-11
+
+# DEFINATION OF DONE : 
+    - K8S agents need persistent storage to use as cache (e.g. cloned git repository to speed up next job). 
+    - HostPath storage driver could be used.
+   
+# SECTIONS:    
+    # SECTION 1 :
+        - How to install Jenkins using docker? You must use jenkins docker image and run jenkins
+
+        STEP 1:
+        - Pull the Jenkins image using from the docker hub.
+            docker pull jenkins/jenkins:lts
+
+        - To check jenkins image is downloaded or not   
+            docker images
+
+        STEP 2:
+        - Run the docker container by using jenkins image, jenkins default port is 8080
+            docker run --rm -d --name vudejenkins -p 8080:8080 -p 50000:50000 jenkins
+            
+        - List of docker containers by fallowing below command
+            docker ps -a    
+
+    # SECTION 2 :
+        - Installing Jenkins on Kubernetes
+
+        STEP 1 :
+        - Create a name space :
+            - First, we need to create the namespace  
+                - kubectl create namespace jenkins  
+
+            - Name space is created or not we use the below command 
+                - kubectl get ns
+
+        STEP 2:
+        - Next, create the YAML file that will deploy Jenkins:
+            - Create and open a new file called jenkins.yaml using vi editor
+            - Now add the code to define the Jenkins image, its port, and several more configurations
+            - For the code we can find the Example section
+            - This YAML file creates a deployment using the Jenkins image and also opens port 8080
+            - You use these ports to access to the Jenkins and accept connections.
+
+            - Now create this deployment in the respective namespace
+                kubectl create -f jenkins.yaml -n <namespace>
+
+            - Use below command to verify the pod’s state
+                kubectl get pods -n <namespace>
+        
+        STEP 3 :
+        - Create servive for the jenkins :
+            - you need to expose it using a Service. You will use the NodePort Service type
+            - Create and open a new file called jenkins-service.yaml
+                vi jenkins-service.yml
+
+            - Add the following code to define the NodePort Service,find the code in example section
+            - you define your NodePort Service and then expose port of the Jenkins pod to port
+
+            - Now create the Service in the same namespace
+                kubectl create -f jenkins-service.yaml -n <namespace>
+
+            - Check that the Service is running or not
+                kubectl get services -n <namespace>
+
+        STEP 4 :
+        - Accessing the Jenkins UI :
+            - In this step, you will access and explore the Jenkins UI
+            - Our NodePort service is accessible on port across the cluster nodes 
+            - To take the VM exernal IP and nodeport IP
+            - Now open a web browser and navigate to <VM exernal IP>:<port>
+            - A page will appear asking for an administrator password
+
+        STEP 5 :
+        - Then we need to login pod :
+
+            - Login the pod pod by using below command
+                kubectl exec -it <podname> -n <namespace> -- bash  
+        
+            - Find the below command for jenkins administrator password
+                cat /var/jenkins_home/secrets/initialAdminPassword     
+
+    # SECTION 3 :
+        - How to integrate jenkins with bitbucket?
+
+        STEP 1:
+        - Create Repo using Bitbucket:
+
+            - First, you need a BitBucket account. Register and login to BitBucket
+            - Create repository 
+            - Create a project and add the project name. Give a name for your repository. 
+            - I am choosing this as a private repository
+
+        STEP 2:
+        - Install the Bitbucket plugin in Jenkins:
+
+            - Log in to the Jenkins server and go to Manage Jenkins.
+            - Then search for the BitBucket plugin and Install without restart the plugin.
+    
+        STEP 3:
+        -  Create New Job in Jenkins and connect BitBucket Repo:
+        
+            - New Item to create a new Jenkins job
+            - Then give a name for the Jenkins job. And then select FreeStyle Project
+            - Then go to the Source Code Management section.and select the repository type bitbucket repository.
+            - Then give the Bitbucket repo in the Repository URL.
+            - Add->Jenkins to pass the username and password of the Bitbucket.
+            - In the Build Trigger section, To select Build when a change is pushed to BitBucket and save it
+
+    # SECTION 4 :
+        -  How to run a sample build by committing code in bit-bucket and triggering Jenkins?
+
+        STEP 1:
+            - Go to the Repository Setting page of your repo in the Bitbucket.
+            - Then Go to the Webhooks section.Then give a name for this hook. Add your Jenkins URL in the URL inputs
+        
+        STEP 2:
+        - Test the BitBucket and Jenkins Integration:
+
+            - To test the integration, click the Build Now button in the Jenkins Job.
+            - See the output using the console.
+            - Everything works fine. So no error. If an error occurs, then build will show red color.
+            - Whenever a new code is committed in the BitBucket,
+            - Jenkins job will automatically create a new build each time.
+
+    # SECTION 5 :
+        - How to integrate Jenkins with docker?
+
+        STEP 1 : Go to your Jenkins dashboard and click Manage Jenkins.
+        STEP 2 : Go to Manage Plugins. Search for Docker plugins and Install without restart button.
+        STEP 3 : Once the installation is done, go to your job in the Jenkins dashboard.
+        STEP 4 : In the job, when you go to the Build step, you can now see the option to start and stop containers.
+
+    # SECTION 6 :
+        - How to integrate Jenkins with K8s?
+
+        STEP 1 : Go to your Jenkins dashboard and click Manage Jenkins.
+        STEP 2 : Go to Manage Plugins. Search for kubernetes plugins and Install without restart button.
+        STEP 3 : Within the Jenkins dashboard, select a Job and then select Configure.Then add build step.
+        STEP 4 : To Select Deploy to Kubernetes, select the kubeconfig stored in Jenkins
+        STEP 5 : Go to Kubernetes cloud configuration (kubeconfig)).Enter the kubeconfig content directly
+        STEP 6 : Fill in the "Config Files" with the configuration file paths. 
+        STEP 7 : By checking "Enable Variable Substitution in Config
+        STEP 8 : Then provide the jenkins credentials like domin, kind, secret and Id
+        STEP 9 : Configure the Jenkins URL Details like jenkins url and pod lebels
+
+    # SECTION 7 :
+        - Declarative Pipeline:
+        - First we need to install pipeline plugin as pipeline plugin
+
+        STEP 1: 
+            Pipeline:
+            - All valid Declarative Pipelines must be enclosed within a pipeline block
+                For example:
+
+                pipeline {
+        
+                }
+            - The top-level of the Pipeline must be a block, specifically: pipeline { }.
+            
+        STEP 2 : 
+            Agent:
+            - where you want buil the job is called agent
+            - The agent section specifies where the entire Pipeline, or a specific stage
+            - The section must be defined at the top-level inside the pipeline block
+            - Execute the Pipeline, or stage, on any available agent. For example: agent any
+
+              agent any {
+
+              }
+
+        STEP 3 : 
+            Stages:    
+            - Stages Containing a sequence of one or more stage directives
+            - The stages section is where the bulk of the "work" described by a Pipeline will be located.  
+            - At a minimum, it is recommended that stages contain at least one stage directive
+            - For each discrete part of the continuous delivery process, such as Build, Test, and Deploy.
+
+              stages { 
+                stage('Example') {
+
+                    }
+                }  
+
+        STEP 4 : 
+            Steps:
+            - The steps section defines a series of one or more steps to be executed in a given stage        
+              directive.
+            - The steps section must contain one or more steps.
+
+            steps {
+                echo 'Hello World'
+            }    
+                  
+    # SECTION 8 :
+        - How to write a scripted jenkins pipeline?
+
+        - A Pipeline’s code defines your entire build process
+        - which typically includes stages for building an application
+        - jenkins scripted pipeline genarally we are using groovy language
+
+        STEP 1 :
+            Node :
+            - The first block to be defined is the “node”:
+            - A node is a machine which is part of the Jenkins environment and is capable of executing a Pipeline.
+            node {
+
+            }    
+
+        STEP 2 :
+            - The next required section is the “stage”
+            - Each stage block specifies the tasks to be performed.
+            - example- Build, Scm,Test and Deploy stages
+            stage ('1'){            
+
+            }
+
+        STEP 3 :
+            - A single task. Fundamentally, a step tells Jenkins what to do at a particular point/step in process
+            - to execute the shell command make use the sh step
+            - echo'hello world'
+
+    # SECTION 9 :
+        - How run jenkins job inside of docker containers?
+
+        STEP 1 : 
+            - Once installed, head over to Jenkins Dashboard –> Manage Jenkins –>Configure system
+
+        STEP 2 : 
+            - Under Configure System, there will be a section named cloud 
+            - Manage Jenkins –> Manage Nodes and Clouds, Under docker you need to fill out the details
+            - Replace “Docker URI” with your docker host IP. 
+            - Test connection” to test if Jenkins is able to connect to the Docker host.
+
+        STEP 3 : 
+            - Now, from Docker Agent Template, Add Docker template.
+            - fill in the details based on the the image    
+            - Labels – Identification for the docker host. It will be used in the Job configuration
+            - Name- Name of the docker template. Here we use the same name as label
+            - The image that you created for the slave. Then give Home folder for the user you have created.
+            - Credentials – add and enter the username and password that you have created for the docker image.
+            - There are additional configurations like registry authentication and container settings.
+            - You can also use JNLP-based slave agents. For this, the configurations need a little change
+            - Primarily the docker image name and the connect method
+            - if you want the workspace to be persistent, add a host volume path under container settings.
+
+        STEP 4 :
+            - Test Jenkins Build Inside a Docker container   
+            - configurations ready, we will test the docker agent plugin using a freestyle job.
+            - Create a freestyle job, select Restrict where this project can be run, select docker host
+            - Add a shell build step which echoes a simple “Hello World“
+            - If you have done all the configurations, builds the project.
+            - With help of console output we can find buils job details.
+
+    # SECTION 10 :
+        - How run jenkins job inside of K8s PODS?
+
+        STEP 1 : Go to Manage Jenkins –> Manage Plugins, search for Kubernetes Plugin and install it.
+        STEP 2 : Once installed, go to Manage Jenkins –> Manage Node & Clouds, “Add a new Cloud” select Kubernetes.
+        STEP 3 : Jenkins server running inside the same Kubernetes cluster
+            - we have inside the Kubernetes cluster with a service account to deploy the agent pods, 
+            - we don’t have to mention the Kubernetes URL or certificate key.
+
+        STEP 4 :
+            - we have to need to create one namespace and service account
+              kubectl create namespace <NS-NAME>
+              kubectl create serviceaccount <SA-NAME> -n <NS-NAME>
+
+        STEP 5 :
+            - Add button under credentials and create a credential type “Secret text“. 
+            - Enter the service account token in the secret box and add other details as description
+            - The kubernetes cloud configuration like kubernetes url, server certificates and namespace credentials
+
+        STEP 6 : Create POD and Container Template    
+            - Next, you need to add the POD template with the details, as Name, namespace, labels, container details
+
+        STEP 7 : 
+            - Go to Jenkins home –> New Item and create a freestyle project.
+            - select Restrict where this project can be run and  label we assigned to the pod template. 
+            - This way, it knows which pod template to use for the agent container.
+            - Add a shell build step with an echo command to validate the job as "echo hello world"
+            - Now, save the job configuration and click “Build Now”
+
+    # SECTION 11 :     
+
+        # Kubernetes agents can access local persistent storage
+        - Kubernetes agents can access local persistent storage
+
+        STEP 1 :
+            - Kubernetes supports many types of storage class and volumes
+            - In this scenario we can use the NFS storage class
+
+        # create storageclass
+                kubectl apply -f storage.yml -n <<namespace>>
+
+        # get sc
+                kubectl get sc
+
+        # describe sc
+                kubectl describe sc
+
+        # delete sc
+                kubectl delete sc <<scname>> -n <<namespace>>
+
+        STEP 2 :
+            - Create a hostPath PersistentVolume
+            - In this section, we'll create a hostPath PersistentVolume
+            - Kubernetes supports hostPath for development and testing on a single-node cluster
+            - A hostPath PersistentVolume uses a file or directory on the Node to attached storage
+            - Here is the configuration file for the hostPath PersistentVolume pv.yml
+
+        # create pv
+                kubectl apply -f pv.yml -n <<namespace>>
+
+        # get pv
+                kubectl get pv
+
+        # describe pv
+                kubectl describe pv vude-pv
+
+        # delete pv 
+                kubectl delete pv vude-pv -n <<namespace>>
+
+        STEP 3 :
+            - Create a PersistentVolumeClaim
+            - Pods use PersistentVolumeClaims to request physical storage
+            - In this section, we create a PersistentVolumeClaim that requests a volume of at least
+              three gibibytes that can provide read-write access for at least one Node.
+            - Here is the configuration file for the hostPath PersistentVolumeClaim pvc.yml  
+
+        # create pvc
+                kubectl apply -f pvc.yml -n <<namespace>>
+
+        # get pvc
+                kubectl get pvc -n <<namespace>>
+
+        # describe pvc
+                kubectl describe pvc vude-pvc -n <<namespace>>
+
+        # delete pvc
+                kubectl delete pvc vude-pvc -n <<namespace>>
+
+            - After we created the PersistentVolumeClaim, If the control plane finds a suitable PersistentVolume
+              with the same StorageClass, it binds the claim to the volume.  
+
+        STEP 4 :   
+            - Create a Pod uses PersistentVolumeClaim as a volume
+            - Now it's time to create a Pod that uses our PersistentVolumeClaim as a volume.
+            - To configuration file for the Pod looks like this pv-pod.yml
+
+        # create pod
+            kubectl apply -f pod.yml -n <<namespace>>
+
+        # get pods
+            kubectl get pods pod.yml -n <<namespace>>
+
+        # describe pod
+            kubectl describe pod pod.yml -n <<namespace>>
+
+        # delete pod
+            kubectl delete pod pod.yml -n <<namespace>>
+
+        # edit pod
+            kubectl edit pod pod.yml -n <<namespace>>
+
+# EXAMPLES :
+
+# Example 1: 
+# Example yml file for pod by using jenkins image 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rjamapax
+  name: vude-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins:lts
+        ports:
+         - name: http-port
+           containerPort: 8080
+# Example 2 :
+# Example yml file for Create a service(NodePort) for jenkins 
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: rjamapax
+  name: vude-svc
+  labels:
+   app: jenkins
+spec:
+  type: NodePort
+  ports:
+ -  port: 8080   
+    protocol: TCP
+  selector:
+    app: jenkins
+
+# Example 3 :
+# Declarative Pipeline Single Step :
+
+    pipeline {
+        agent any
+        stages {
+            stage('Example') {
+             steps { 
+                 echo 'Hello World'
+                }
+            }
+        }
+    }
+
+# Example 4 :
+# Jenkinsfilent with Docker agent :
+
+pipeline {
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+
+# Example 5 :
+# Scripted pipeline in single step :
+
+    node{
+        stage('hello'){
+            echo "hello world"
+        }
+    }
+
+# VERIFICATIONS:
+    - Install Jenkins using docker - Done 
+    - Install Jenkins using POD - Done
+    - Write a sample Jenkinsfile - Done
+    - Integrate jenkins with bitbucket - Not Done
+    - Integrate Jenkins with docker - Not Done
+    - Integrate Jenkins with K8s - Not Done
+    - Run jenkins job inside of docker containers - Not Done
+    - Run jenkins job inside of K8s PODS - Not Done    
+
+# REFERENCE :  
+    - https://plugins.jenkins.io/kubernetes/
+    - https://www.jenkins.io/blog/2021/12/08/containers-as-build-agents/
+    - https://devopscube.com/jenkins-build-agents-kubernetes/
+    - https://www.bogotobogo.com/DevOps/Docker/Docker_Kubernetes_PersistentVolumes_PersistentVolumeClaims.php
+    - https://medium.com/@vishal.sharma./running-jenkins-in-kubernetes-cluster-with-persistent-volume-da6584edc126
+    - https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-kubernetes

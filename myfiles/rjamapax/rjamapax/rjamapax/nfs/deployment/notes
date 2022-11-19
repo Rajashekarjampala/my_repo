@@ -1,0 +1,10 @@
+# create deployment
+kubectl apply -f dep.yml -n rjamapax
+# get deployment
+kubectl get deployment -n rjamapax
+# describe pod
+kubectl describe deployment <depname> -n rjamapax
+#delete pod
+kubectl delete deployment <depname> -n rjamapax
+# edit pod
+kubectl edit deployment <depname> -n rjamapax

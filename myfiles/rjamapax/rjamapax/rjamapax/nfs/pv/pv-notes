@@ -1,0 +1,8 @@
+# create pv
+kubectl apply -f pv.yml -n rjamapax
+# get pv
+kubectl get pv
+# describe pv
+kubectl describe pv vude-pv
+# delete pv 
+kubectl delete pv vude-pv -n rjamapax

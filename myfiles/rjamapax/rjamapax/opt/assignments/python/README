@@ -1,0 +1,762 @@
+# What is Python Method ? :
+    - Python is a Object-Oriented Programming language
+    - Python We have objects. These objects consist of state, properties and behavior
+    - Object are defined by the attributes and the behavior is defined using methods.
+    - These methods are defined inside a class.
+    - These methods are the reusable code that can be at any point in the program.
+
+# Types of Methods in Python :
+    1. Instance methods
+    2. Class methods
+    3. Static methods
+
+-----------------------------------------------------------------------------------------------
+
+# Python Classes and Objects :
+
+# What is Python class ? :
+    - Python class is a "blueprint" for creating objects. like a plan
+    - class as a like sketch/prototype 
+    - Class is cobination of variables and methods
+    - A Class is like an object constructor
+    - It has a logical existance 
+
+# Create a Class :
+    - To create a class by using the keyword "class"
+
+    - Example : Create a class named Demo : 
+
+      class <<class_name>>: 
+
+---------------------------------------------------------------------------------------------    
+
+# What is Python Object ? :
+    - Object instances of that class.
+    - The procedure to create an object is similar to a function call
+    - Object is a Physical and logical existance.
+
+# Create Object :
+      obj = ClassName()
+      print(obj.atrr)
+
+---------------------------------------------------------------------------------------------      
+
+# What is the __init__() Function / init Method ? :
+    - All classes have a function called __init__()
+    - Which is always executed when the class is being initiated.
+    - Use the __init__() function to assign values to object properties
+    - The __init__() function gets called whenever a new object of that class is instantiated
+    - init is to installise the variable
+
+      def __init__(self)
+
+# Self :
+    - The self parameter is a reference to the current instance of the class
+    - Self is used to access variables that belongs to the class.
+    - And first parameter of any function in the class
+    - Self is define the properties this class
+    - Selt is an arguement and it is a default arguement
+
+# Example :
+
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("John", 36)
+
+print(p1.name)
+print(p1.age)
+
+---------------------------------------------------------------------------------------------------
+
+# The pass Statement :
+    - class definitions cannot be empty, but if you have some reason have a class with no content
+    - We can put in the pass statement to avoid getting an error.
+
+    - Example:
+      class Person:
+        pass
+
+# Delete Objects :
+    You can delete objects by using the del keyword:    
+
+    - Example
+      Delete the p1 object:
+        del <<obj_name>>    
+
+--------------------------------------------------------------------------------------
+# TASKS :
+$ 1. What is a python array ~ Define & execute an array ~ Coding
+$ 2. What is a python dictionary ~ Define & execute an array ~ Coding
+$ 3. What is a Python function? Why we use it? ~ Theory
+$ 4. What is a python function with argument? ~ Theory
+$ 5. What is a python function without argument? ~ Theory
+$ 6. Write a python function to find sum of 2 numbers passed as an argument. ~ Coding
+$ 7. Write a python function to print your name ~ Coding
+$ 8. Write a python function to print your name passed as an argument ~ Coding
+$ 9. Write a python function to print all the elements of an array passed as an argument ~ Coding
+
+# What is python Array:
+    - lienear data structure, data stored in linearly.
+    - multiple values store in in the single variable.
+    - same data type values in store in single variable
+
+    - Array is a homogenous datatype -> same data type values in store in single variable
+    - Array is a Compound  datatype -> We can store more than one element
+    - Array is a numaric data struture -> Array only stored in numbers (mostly prefferable number datatype)
+    - Array is a mutable datatype -> Add, Remove, Update the elements 
+      
+    - We have to use module for "from array import *"
+
+    - if store the integers by using "i" (data type)
+    - i is user for signed values (positive and nagitive values)
+    - I is used for unsigned values (only positive values)
+
+# Example of array :
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+      print(arr1)
+
+# Array print in reverese elements :
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+      <arry-name>.reverese()
+      print (<arry-name>)
+
+# Array print in reverese with specific element based on index :
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+      <arry-name>.reverese
+      print (<arry-name> [2])
+
+# Array print specific element
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+      print (<arry-name> [2])
+
+# buffer_info method:
+    - Array adress and size of the elements
+
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+      print (<arry-name>.buffer_info())
+
+# Array range and lenth print by using for loop:
+
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+      for i in range (len(arr1)):
+        print (arr1[i])  
+
+        or 
+
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+      for i in arr1:
+        print (i)      
+
+# Typecode method :
+    - To copy the elemets from one array to another array
+
+      from array import *  
+      arr1=array('i', [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+      arr2=array(arr1.typecode, (a for a in arr1))
+      for i in arr2:
+        print(i)
+
+# print elements typecode double=float "d" method :
+    - If you work with small quantities of data we can use d
+    - Double of the number of bits float can store.
+    - Double is more precise and for storing large numbers, we prefer double over float
+
+      from array import *  
+      arr1=array('d', [1, 2.5, 3.8, 4, 5, 6.7, 7, 8.2, 9])
+
+      arr2=array(arr1.typecode, (a for a in arr1))
+      for i in arr2:
+        print(i)
+
+# Append Method :
+     - New elemets are add to array  
+
+      from array import *  
+      arr1=array('d', [1, 2.5, 3.8, 4, 5, 6.7, 7, 8.2, 9])
+
+      arr1.append(10.5)
+
+      for i in arr1:
+        print(i)
+
+# Pop Method :
+    - Remove element from array based on index
+
+      from array import *  
+      arr1=array('d', [1, 2.5, 3.8, 4, 5, 6.7, 7, 8.2, 9])
+
+      arr1.pop(2)
+
+      for i in arr1:
+        print(i)
+
+-----------------------------------------------------------------------------------------------------
+
+# What is Dictionary in python ? :
+  - Dictionary is data structure in python
+  - Dictionary is to store the pair of values
+  - We can store the data of key:value pairs
+  - Key is must be in unique, 
+  - Key is imutable (cahnge is not possible) 
+  - Value is mutable (changes is possible)
+  - Cobination of key and value is called item. (key+value=item)
+
+# Dictonary functions :
+  1. Key
+  2. Value
+  3. Items
+  4. Pop
+  5. Clear
+  6. Update
+
+# dictonary metnods Definations :
+  - clear()	Removes all the elements from the dictionary
+  - copy()	Returns a copy of the dictionary
+  - fromkeys()	Returns a dictionary with the specified keys and value
+  - get()	Returns the value of the specified key
+  - items()	Returns a list containing a tuple for each key value pair
+  - keys()	Returns a list containing the dictionary's keys
+  - pop()	Removes the element with the specified key
+  - popitem()	Removes the last inserted key-value pair
+  - update()	Updates the dictionary with the specified key-value pairs
+  - values()	Returns a list of all the values in the dictionary  
+
+# Dictonary syntax :
+  dic={'key':'value','key2':'value2'}
+  print(dic)
+
+  Example:
+  dic={'name':'raj','age':25}
+  print(dic)
+
+# Change value of dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}  
+  dic['name']='sai'
+  print(dic)
+
+# Delete Dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  del dic
+  print(dic)
+
+# Find the Length of the Dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  print(len(dic))
+
+# Find the keys of dictonary:
+  dic={'name':'raj','age':25,'des':'devops'}
+  print(dic.keys())
+
+# Find the values of dictonary:
+  dic={'name':'raj','age':25,'des':'devops'}
+  print(dic.values())
+
+# Find the items of dictonary:  
+  dic={'name':'raj','age':25,'des':'devops'}
+  print(dic.items())
+
+# Clear the dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  dic.clear()
+  print(dic)  
+
+# To copy one dictonary to other dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  dic1=dic.copy()
+  print(dic1)
+
+# Update the Dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  dic.update{'address':'hyderabad'}
+  print(dic)
+
+--------------------------------------------------------------------------------------------------
+
+# What is pyhon function :
+   - pyhon function is simply called as Block of code
+   - One or More statements write in a single Block
+   - Block of code write once execute more time 
+   - Reusable of code 
+   - Python function we can use the key word of 'def'(defination).
+   - You can pass data, known as parameters, into a function
+  
+# Syntax of python function :
+  def my_function():                # pass the function name and parameters 
+    print("Hello world")            # to print op
+  my_function()                     # function call
+
+# Python Functions with Arguments :
+  - Information can be passed into functions as arguments.
+  - Arguments are specified after the function name, inside the parentheses
+  - You can add as many arguments as you want, just separate them with a comma.
+  - The terms parameter and argument can be used for the same thing information that are passed into a function.
+
+  - Types of arguments:
+    1. positional argument
+    2. keyword argument
+    3. Default argument
+    4. Variable length argument
+
+# positional argument :
+  - number of Arguments should be same both function call and function defination
+  - position and order should be followed.
+
+  def display(a,b):   # function defination
+    print(a,b)        # 10,20
+  display(10,20)      # function call
+
+# keyword argument :
+  - order/position is not required 
+  - based on Key word (name)
+
+  def display(a,b):   
+    print(a,b)        
+  display(b=10,a=20)  
+
+# Default argument :
+  - Number of arguments need not be match with both function call and function defination
+  - Some argumets will be consider as default arguments
+
+  def display(name,course="b.tech"):
+
+    print(name)
+    print(course)
+
+  display(name="raj",course="m.tech") 
+  display(name="sai") 
+
+# Variable length argument :
+  - Sometimes, we do not know in advance the number of arguments that will be passed into a function.
+  - We can use the arbitrary arguments
+  - By placing * as prefix to the argument of function defination
+
+  def display(*course):
+    for i in course:
+      print(i)
+  display("b.tech","m.tech","mba,","mca")    
+
+# Print sum of the two numbers by using functions with arguemts :
+  def sum (x,y):
+    s=x+y
+    print("sum is:",s)
+  sum(10,20)   
+
+--------------------------------------------------------------------------------------------------------------------------
+
+# What is List ?
+  - To store the one or more elements in single variable
+  - List is a mutable (modify the data)
+  - We can store the data type -> floting, integers, strings, boolean, double
+
+# List Methods :
+  1. Append
+  2. Extend 
+  3. Remove
+  4. Insert
+  5. Index
+  6. Count 
+
+# List Method Definations :
+  - append()	Adds an element at the end of the list
+  - clear()	Removes all the elements from the list
+  - copy()	Returns a copy of the list
+  - count()	Returns the number of elements with the specified value
+  - extend()	Add the elements of a list (or any iterable), to the end of the current list
+  - index()	Returns the index of the first element with the specified value
+  - insert()	Adds an element at the specified position
+  - pop()	Removes the element at the specified position
+  - remove()	Removes the first item with the specified value
+  - reverse()	Reverses the order of the list
+  - sort()	Sorts the list
+ 
+# List Syntax:
+  list=[3,5,'raj',2.5,8,9,'shekar']   
+  print(list)
+
+# Append :
+  - New elemets are add to list
+
+  list=[3,5,'raj',2.5,8,9,'shekar']   
+  list.append(1)
+  print(list)
+
+# Extend :
+
+  list=[3,5,'raj',2.5,8,9,'shekar',3]   
+  list.extend([4,9])
+  print(list)
+
+# Count :
+   Number of element of list
+
+  list=[3,5,'raj',2.5,8,9,'shekar',3]
+  print(list.count(1))
+
+# Length of list :
+  list=[3,5,'raj',2.5,8,9,'shekar',3]
+  print(len(list))
+
+# Pop :
+  - To remove the element from list
+
+  list=[3,5,'raj',2.5,8,9,'shekar',3]
+  list.pop(1)
+  print(list)
+
+#  Reverse of List :
+
+  list=[3,5,'raj',2.5,8,9,'shekar',3]
+  list.reverse()
+  print(list)
+
+# Sort :
+
+  list=[3,5,7,2.5,8,9,7.7,3]
+  list.sort()
+  print(list)
+
+# Index
+  list=[35,49,98,57,85,12,90,]
+  x=list.index(90)
+  print(x)  
+
+# Insert :
+  list=[22,44,'raj','prashanth',8.5,'goutham']
+  list.insert(0,99)
+  print(list)  
+
+--------------------------------------------------------  
+
+# What is sets :
+  - Set items are unordered, unchangeable, and do not allow duplicate values.
+  - Unorder collection of items 
+  - Each and every value is unique in the set
+
+  add()	Adds an element to the set
+  clear()	Removes all the elements from the set
+  copy()	Returns a copy of the set
+  difference()	Returns a set containing the difference between two or more sets
+  intersection()	Returns a set, that is the intersection of two other sets
+  isdisjoint()	Returns whether two sets have a intersection or not
+  pop()	Removes an element from the set
+  union()	Return a set containing the union of sets
+  update()	Update the set with the union of this set and others
+
+# add :
+  - fruits = {"apple", "banana", "cherry"}
+  - fruits.add("orange")
+  - print(fruits)  
+
+#   
+
+
+
+---------------------------------------------------
+# itaration method:
+
+  dt = {'a': 'apple', 'b': 'ball', 'c': 'cat'}
+  for key, value in dt.items():
+  print(key, value)
+
+
+# Update the Dictonary :
+  dic={'name':'raj','age':25,'des':'devops'}
+  for i in dic.update{'address':'hyderabad'}
+  print(dic)
+----------------------------------
+lst = [10, 50, 75, 83, 98, 84, 32]
+ for x in range(len(lst)): 
+    print(lst[x])   
+--------------------------------
+# Length of list :
+list=[3,5,'raj',2.5,8,9,'shekar',3]
+#  print(len(list))
+
+for i in range (len(list)):
+  print(len(i))
+------------------------
+data = ["a", "b", "c", "d"]
+
+results = []
+print(results)
+
+for x in data:
+    results.append(x)
+
+print(results)  
+
+---------------------------------
+>>> a = ["foo", "bar", "baz"]
+>>> for i in reversed(a):
+...     print(i)
+--------------------------------
+-------------------------------
+# Length of list :
+list=[3,5,'raj',2.5,8,9,'shekar',3]
+#  print(len(list))
+
+for i in range (len(list)):
+  print(len(i))
+----------------------
+list append - add 
+a = []
+for i in range(5):
+    # change a = a.append(i) to    
+    a.append(i)
+print(a)
+--------------------------------
+update list
+myList = ["one", "two", 37, "four", 51];
+for i, item in enumerate(myList):
+	if item == 37:
+		myList[i] = 48;
+print(myList);
+----------------------------
+delete list
+list_of_num = [51, 52, 53, 54, 55, 56, 57, 58, 59]
+for elem in list(list_of_num):
+    if elem == 54 or elem == 55:
+        list_of_num.remove(elem)
+print(list_of_num)
+--------------------------------
+sorting list
+L=[1,2,3,6,7,9,4]
+NL=[]
+for _ in range(len(L)):
+     NL.append(min(L))
+     L.remove(min(L))
+     print(NL)
+---------------------------------
+dictionary itarate
+a_dict = {'color': 'blue', 'fruit': 'apple', 'pet': 'dog'}
+for key in a_dict:
+  print(key)     
+
+-------------------------------------------------------
+
+# What is Python Method ? :
+    - Python is a Object-Oriented Programming language
+    - Python We have objects. These objects consist of state, properties and behavior
+    - Object are defined by the attributes and the behavior is defined using methods.
+    - These methods are defined inside a class.
+    - These methods are the reusable code that can be at any point in the program.
+
+# Types of Methods in Python :
+    1. Instance methods
+    2. Class methods
+    3. Static methods
+
+-----------------------------------------------------------------------------------------------
+
+# Python Classes and Objects :
+
+# What is Python class ? :
+    - Python class is a "blueprint" for creating objects. like a plan
+    - class as a like sketch/prototype 
+    - Class is cobination of variables and methods
+    - A Class is like an object constructor
+    - It has a logical existance 
+
+# Create a Class :
+    - To create a class by using the keyword "class"
+
+    - Example : Create a class named Demo : 
+
+      class <<class_name>>: 
+
+---------------------------------------------------------------------------------------------    
+
+# What is Python Object ? :
+    - Object instances of that class.
+    - The procedure to create an object is similar to a function call
+    - Object is a Physical and logical existance.
+
+# Create Object :
+      obj = ClassName()
+      print(obj.atrr)
+
+---------------------------------------------------------------------------------------------      
+
+# What is the __init__() Function / init Method ? :
+    - All classes have a function called __init__()
+    - Which is always executed when the class is being initiated.
+    - Use the __init__() function to assign values to object properties
+    - The __init__() function gets called whenever a new object of that class is instantiated
+    - init is to installise the variable
+
+      def __init__(self)
+
+# Self :
+    - The self parameter is a reference to the current instance of the class
+    - Self is used to access variables that belongs to the class.
+    - And first parameter of any function in the class
+    - Self is define the properties this class
+    - Selt is an arguement and it is a default arguement
+
+# Example :
+
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("John", 36)
+
+print(p1.name)
+print(p1.age)
+
+---------------------------------------------------------------------------------------------------
+
+# The pass Statement :
+    - class definitions cannot be empty, but if you have some reason have a class with no content
+    - We can put in the pass statement to avoid getting an error.
+
+    - Example:
+      class Person:
+        pass
+
+# Delete Objects :
+    You can delete objects by using the del keyword:    
+
+    - Example
+      Delete the p1 object:
+        del <<obj_name>>    
+
+-----------------------------------------------------------------------------------
+
+# Task 1:
+# Write a function to take 3 arguments. A dictionary, an integer X and an integer Y as inputs. 
+# Multiply each key by argument X and value by argument Y and return the dict.
+# Example: modify_dict({1:1,2:2,3:3,4:4,5:5},2,3) -> I will call your function like this
+# Expected Output: {2:3,4:6,6:9,8:12,10:15}
+
+def function(s,x,y):
+    s=dict(s)
+    x=int(x)
+    y=int(y)
+    d={}
+    for i,j in s.items():
+        d[i*x]=j*y
+    return d
+print(modify_dict({1:1,2:2,3:3,4:4,5:5},2,3))    
+
+# Task 2:
+# Write a function to take 2 args. A list and an Integer X. 
+# From the list find out all the numbers that are >er than the integer X.
+# Example : check_list([1,3,5,7,9,10] , 3)
+# Expected Output: [5,7,9,10]
+
+def check_list(s,x):
+    s=list(s)
+    fl=[]
+    x=int(x)
+    for i in s:
+        if(i>x):
+            fl.append(i)
+        
+    return fl
+print(check_list([1,3,5,7,9,10],3))
+
+# task 3:
+# Write a function to take 2 args. A list and an Integer X.
+# From the list find out all the numbers that are not divisible by integer X.
+# Example : check_list([1,3,5,7,9,10] , 3)
+# Expected Output: [1,5,7,10]
+
+def notdv_list(s,x):
+    s=list(s)
+    fl=[]
+    x=int(x)
+    for i in s:
+        if(i%x!=0):
+            fl.append(i)
+        
+    return fl
+print(notdv_list([1,3,5,7,9,10],3))
+
+# task 4:
+# Write a function to take 2 args. A dictionary, an integer X. 
+# From the dictionary find the keys that are divisible by integer X and return the dictionary.
+# Example: check_dict( {1:4,3:9,2:6,10:7,19:10,11:12},2 )
+# Expected Output: {2:6, 10:7}
+
+def dv_dict(s,x):
+    s=dict(s)
+    d={}
+    x=int(x)
+    for i,j in s.items():
+        if(i%x==0):
+            d[i]=j
+        
+    return d
+print(dv_dict({1:4,3:9,2:6,10:7,19:10,11:12},2))
+
+----------------------------------------------------------------------------------------------------------
+
+# Add,sub,mult,div of two list:
+lt1 = [5, 10, 15, 20, 25, 30]  
+lt2 = [2, 4, 6, 8, 10, 12]  
+
+val=list() # empty list
+for i in range(len(lt1)): # itarate
+  ans=lt1[i]+lt2[i]
+  val.append(ans)
+print(val)  
+
+...................................................................................
+
+# Check Even, add, divisons from list:
+list1 = [11, 23, 45, 23, 64, 22, 11, 24]
+
+for i in list1:
+  if i%2!=0:
+    print(i)
+
+--------------------------------------------------------------------------------------
+# Add form list:
+a_list = [2, 3, 4]
+
+product = 0
+
+for item in a_list:
+	product = product + item
+print(product)#end
+---------------------------
+# Product:
+a_list = [2, 3, 4]
+
+product = 1
+
+for item in a_list:
+	product = product * item
+print(product)
+------------------------------
+# Count list:
+# my_list = ['a', 'b', 'c']
+def find_ind(lst):
+  new_lst=[]
+  
+  for i in enumerate(lst):
+    new_lst.append(i)
+
+  return new_lst
+
+result=find_ind([12,34,65,78])
+print('ind and ele:',result)
+  
+
+

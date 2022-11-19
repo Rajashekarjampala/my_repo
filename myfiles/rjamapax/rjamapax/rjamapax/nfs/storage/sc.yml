@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage
+  namespace: rjamapax
+provisioner: externanfs
+parameters:
+  server: 10.208.35.14
+  path: /opt/vudenfs/vudedata
+  readOnly: "false"

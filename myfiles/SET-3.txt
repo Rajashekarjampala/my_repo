@@ -1,0 +1,77 @@
+SET-3
+
+'''1. Write a function to take a list as an argument. Remove all duplicates from the list. 
+Don't use any built-in. Check using if conditions.
+    Example : 
+        listA=[1,2,3,4,5,6,7,8,9,10,11,12,1,1,2,4,4,5,6,7]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [1,2,3,4,5,6,7,8,9,10,11,12]'''
+
+def check_dup(listA):
+    new_list=[]
+    for i in listA:
+        if (i not in new_list):
+            new_list.append(i)
+    return new_list
+print(check_dup([1,2,3,4,5,6,7,8,9,10,11,12,1,1,2,4,4,5,6,7]))        --------------------------------------------------
+'''2. Write a function to take a dict as an argument. Find the key that has maximum value and return the key.
+    Example : 
+        testDict={1:4,10:100,3:90,4:40,6:80,12:200}
+        result=func_exec(testDict)
+        print(result)
+        Expected Output : 12
+        Reason: Output is 12 since 12 has value of 200 which is greater than other values'''
+
+def max_key(dic):
+    val=dic.values()
+    for i,j in dic.items():
+           if (max(val)==j):
+              return i
+print(max_key({1:4,10:100,3:90,4:40,6:80,12:200}))     ----------------------------------------------
+'''3. Write a function to take a list, number X,Y,Z as arguments. 
+From the list pick the elements that are >er than (X+Y+Z). Add those elements to new list. Finally return the new list.
+    Example : 
+        listA=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+        numX=10
+        numy=20
+        numZ=25
+        result=func_exec(listA,numX,numY,numZ)
+        print(result)
+        Expected Output : [300,100,120,200,400]'''
+
+def pic_gre(listA,x,y,z):
+    new_list=[]
+    for i in listA:
+        if (i>(x+y+z)):
+            new_list.append(i)
+    return new_list
+print(pic_gre([1,2,300,4,5,6,7,8,9,100,11,120,200,400],10,20,25))  
+-----------------------------------------------------
+'''4. Write a function to take a list, number X,Y,Z as arguments.
+ From the list pick the elements that are <er than (X+Y+Z). Add those elements to new list. Finally return the new list.
+    Example : 
+        listA=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+        numX=10
+        numy=20
+        numZ=25
+        result=func_exec(listA,numX,numY,numZ)
+        print(result)
+        Expected Output : [1,2,4,5,6,7,8,9,11]'''
+
+def pic_les(listA,x,y,z):
+    new_list=[]
+    for i in listA:
+        if (i<(x+y+z)):
+            new_list.append(i)
+    return new_list
+print(pic_les([1,2,300,4,5,6,7,8,9,100,11,120,200,400],10,20,25))   
+---------------------------------------------------
+5. Write a function to take a dict, number X,Y as arguments. If the prod of (dict key * dict val) is > sum of number (X+Y), then add it to new dict. Finally iterate and return the new dict.
+    Example : 
+            testDict={1:4,10:2,3:4,4:7,6:11,12:9}
+            numX=20
+            numY=30
+            result=func_exec(testDict,numX,numY)
+            print(result)
+            Expected Output : {6:11,12:9}}

@@ -1,0 +1,50 @@
+#Installing and configuring NFS Server on Ubuntu:
+
+#Step 1: Install NFS Kernel Server in Ubuntu
+
+sudo apt update
+sudo apt install nfs-kernel-server
+
+#Step 2: Create an NFS Export Directory
+
+sudo mkdir -p </mnt/nfs_share>
+sudo chown -R nobody:nogroup </mnt/nfs_share/>
+sudo chmod 777 </mnt/nfs_share/>
+
+#Step 3: Grant NFS Share Access to Client Systems
+
+sudo vi /etc/exports
+
+#Step 4: Export the NFS Share Directory
+
+sudo exportfs -a
+sudo systemctl restart nfs-kernel-server
+
+#Step 5: Allow NFS Access through the Firewall
+
+sudo ufw allow from <192.168.43.0/24> to any port nfs
+sudo ufw status
+
+
+#Install the NFS Client on the Client Systems:
+
+#Step 1: Install the NFS-Common Package
+
+sudo apt update
+sudo apt install nfs-common
+
+#Step 2: Create an NFS Mount Point on Client
+
+sudo mkdir -p </mnt/nfs_clientshare>
+
+#Step 3: Mount NFS Share on Client System
+
+sudo mount <192.168.43.234>:</mnt/nfs_share>  </mnt/nfs_clientshare>
+
+#Step 4: Testing the NFS Share on Client System
+
+cd /mnt/nfs_share/
+touch file1.txt file2.txt file3.txt
+
+ls -l /mnt/nfs_clientshare/
+

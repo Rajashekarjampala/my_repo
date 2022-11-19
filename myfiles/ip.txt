@@ -1,0 +1,145 @@
+10.208.36.155  10.208.44.141 ..... yeti ip
+10.208.36.175  10.208.35.14 ..... sai ip
+10.208.36.148  10.208.43.246 ..... my ip
+10.74.13.253   10.74.13.253 .... Arun ip
+
+ https://nsg-jira.intel.com/browse/CICD-79   .... my jira ticket
+
+ https://nsg-jira.intel.com/browse/INFS-80363  ..... my jira
+
+
+
+https://github.com/busani9/kubernetes
+
+
+
+
+
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+spepc:
+  selector:
+    matchLabels
+       demotype: nginx-daemonset-demo
+  template:
+    metadata:
+      labels:
+         demotype: nginx-daemonset-demo
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+  
+
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+spepc:
+  selector:
+    matchLabels:
+       demotype: nginx-daemonset-demo
+  template:
+    metadata:
+      labels:
+         demotype: nginx-daemonset-demo
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      nodeSelector:
+      gpupresent: "true"
+
+
+
+
+ readOnly: false
+
+annotations:
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: glusterfs-pv
+spec:
+  storageClassName: glusterfs
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  glusterfs:
+    endpoints: glusterfs-cluster
+    path: /mnt/glustervol
+  persistentVolumeReclaimPolicy: Retain
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: glusterfs-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+     requests:
+       storage: 1Gi
+
+
+------------------
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: glusterfs
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: "http://10.208.35.14:8080"
+  restauthenabled: "false"
+  volumetype: "replicate:2"
+
+
+Hi, arun good morning 
+i received new VM it is unable to connect may problem with RDP
+i did connect with IT team then i will update you
+
+Hi, john im 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vude-pv-pod
+  namespace: rjamapax
+spec:
+  volumes:
+    - name: vude-nginx-pv-storage
+      persistentVolumeClaim:
+        claimName: vude-pvc
+  containers:
+    - name: vude-nfs-tests-nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "vude-nfs-nginx"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: vude-nginx-pv-storage
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+# create pod
+kubectl apply -f pod.yml -n rjamapax
+# get pods
+kubectl get pods vude-pod -n rjamapax
+# describe pod
+kubectl describe pod vude-pod -n rjamapax
+#delete pod
+kubectl delete pod vude-pod -n rjamapax
+# edit pod
+kubectl edit pod vude-pod -n rjamapax
+
+# login to the pod
+kubectl exec -it vude-pod -n rjamapax -- bash
+ls /usr/share/nginx/html/
+cat /usr/share/nginx/html/file2

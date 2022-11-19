@@ -1,0 +1,501 @@
+hi, Arun good morning
+as of now i created 3users, 3SAs, 3ns,
+ecah user map with rolebinding and then SA attach to the deployment
+
+https://www.adaltas.com/en/2019/08/07/users-rbac-kubernetes/
+
+Generating private key for user
+Generating certificate signing request 
+Copy kubernetes ca certificate and key from the master node kmaster
+Sign the certificate using certificate authority
+
+1. Create multiple users in linux - Done
+    2. Deployment yml file - Done
+    3. Role yml file - Done
+    4. Role binding yml file - Done
+    5. Role deployment - Done
+    6. Role binding deployment - Done
+    7. Users attached to role binding -Not-Done
+    8. Able to access to PODS using User -Not-Done 
+    9. RBAC - Only users with access can do 
+       CREATE/UPDATE/DELETE on the namespace -Not-Done Able to access user create/delete/update on namespace
+"ls;top;free -m;df -h;ps -A --sort -rs
+
+"ls;./scp.sh" > output
+#! /bin/bash 
+# store destination paths in variables
+blog="username@example.com:~/uploads"
+pi="pi@192.168.X.X:/home/pi/Shared"
+# parse filepath to get filename only and store in var
+file="$(basename $2)"
+# if $1 var equals "blog" format SCP to copy file ($2) to blog
+[ "$1" == blog ] && scp "$2" "$blog"/"$file"
+# if $1 var equals "pi" format SCP to copy file ($2) to raspberry pi
+[ "$1" == pi ] && scp "$2" "$pi"/"$file"
+
+
+function statscollector () {
+# sshpass -p vudemaster ssh -o "StrictHostKeyChecking=No" vudemaster@10.208.43.246 "ls"
+sshpass -p $3 ssh -o "StrictHostKeyChecking=No" $2@$1 -p $4 "$5" >> $6
+}
+
+sshpass -p "$password" scp -rC $origin $username@$Ip:$destination
+
+sshpass -p $1 ssh -o "StrictHostKeyChecking=No" $2@$5 -p 
+
+assword="vudeadmin" 1
+username="vudeadmin" 2
+origin="/opt/vude/assignments/remote-exec/script/file1.txt" 3
+destination="/opt/vude/assignments" 4
+Ip="10.208.44.141" 5
+
+# $1 - IP Address
+# $2 - Username
+# $3 - Password
+# $4 - Port number
+# $5 - Shell-file-full-path-remote
+# $6 - Shell-file-full-path-input
+# $7 - Output-file-full-path
+
+# bash remote.sh <<IP>> <<USERNAME>> <<PASSWORD>> <<PORT>> <<SHELL-FILE-FULLPATH-REMOTE>> <<SHELL-FILE-FULLPATH-INPUT>> <<<OUTPUT-FILE-FULLPATH>>
+
+function scp () {
+# sshpass -p vudemaster scp sharefile1 vudemaster@10.208.44.141:/home/vudeadmin
+sshpass -p "$3" scp -rC $6 $2@$1:$5 >> "${4}"
+}
+
+#sshpass -p vudemaster scp sharefile1 vudemaster@10.208.43.246:/home/vudemaster
+ 
+scp $1 $2 $3 $4 $5 $6
+
+
+bash remote.sh 10.208.44.141 vudeadmin vudeadmin 22 /opt/vude /opt/vude/assignments/remote-exec/script/pra.sh /opt/vude/assignments/remote-exec/output
+
+bash pra.sh 10.208.44.141 vudeadmin vudeadmin 22 /opt/vude /opt/vude/assignments/remote-exec/script/pra.sh /opt/vude/assignments/remote-exec/output
+
+function scp () {
+# sshpass -p password scp file-path-remote vudeadmin@10.208.44.141:file-path-input file-path-output
+sshpass -p "$3" scp -rC $6 $2@$1:$5 >> "${4}"
+
+function scp () {
+# sshpass -p password scp file-path-remote vudeadmin@10.208.44.141:file-path-input file-path-output
+sshpass -p "$3" scp -rC $6 $2@$1:$5 >> "${4}"
+}
+
+# Execute the above SCP function with required arguments
+scp $1 $2 $3 $4 $5 $6 
+
+
+# An Example
+# bash remote.sh 10.208.44.141 vudeadmin vudeadmin 22 /tmp/input /opt/vude/assignments/remote-exec/input /opt/vude/assignments/remote-exec/output
+function do_scp () {
+
+    # sshpass scp <<filename>> <<username>>@<<ip>> -p <<port>> 
+    sshpass -p "$3" scp -rC $6 $2@$1:$5 >> "${4}"
+
+}     
+
+function main() {
+    do_scp $1 $2 $3 $4 $5 $6 $7
+}
+
+main $1 $2 $3 $4 $5 $6 $7
+
+
+
+Move all files to remote VM - sshpass scp
+
+chmod +x all the files in the remote VM - sshpass chmod
+
+Execute the files in the remote VM - sshpass bash ex1.sh
+
+
+# Arguments description
+# $1 - IP Address
+# $2 - Username
+# $3 - Password
+# $4 - Port number
+# $5 - Command
+# $6 - Output file path
+
+function statscollector () {
+   # sshpass -p vudemaster ssh -o "StrictHostKeyChecking=No" vudemaster@10.208.43.246 "ls"
+     sshpass -p $3 ssh -o "StrictHostKeyChecking=No" $2@$1 -p $4 "$5" >> $6
+}
+
+# Execute the above statscollector function with required arguments
+statscollector $1 $2 $3 $4 $5 $6
+
+iam trying to write code for below steps
+chmod +x all the files in the remote VM - sshpass chmod
+Execute the files in the remote VM - sshpass bash ex1.sh
+
+ssh root@MachineB 'bash -s' < local_script.sh
+
+ssh user@server-name-here /path/to/command
+ssh user@server-name-here /path/to/command arg1 arg2
+
+ssh user@remote-addr "bash -s -- $args" < "$script"
+
+sshpass -p 'Baels@123' scp -r tools@10.45.67.11:/home/tools/cw/baeldung/get_host_info.sh ./;
+
+ssh linuxtechi@192.168.10.10 ./system-info.sh
+
+ssh linuxtechi@192.168.10.10 bash -c "'echo $msg'"
+
+
+
+
+
+sshpass scp <<filename>> <<username>>@<<ip>> -p <<port>>
+sshpass -p $3 ssh -o "StrictHostKeyChecking=No" $2@$1 -p $4
+
+sshpass -p vudadmin ssh -o "StrictHostKeyChecking=No" vudeadmin@10.208.44.141
+sshpass -p $3 ssh -o "StrictHostKeyChecking=No" $2@$1 -p 
+
+1. installation of jenkines
+2. integrate git with jenkins
+3. build with maven
+4. freestyle jobs
+5. declarative pipeline
+6. sonar as code quality checking 
+7. nexus as artifactory repository
+------------------------------------------------
+ What's Jenkins and why it's used?
+-   Jenkins open source automation tool.
+-   Jenkins used to automate to building, testing, and deploying software.
+-   Jenkins is the most famous CI-CD tool.
+-   Jenkins achieves CI with the help of plugins.
+
+# What's Jenkins pipeline? Why it's used?
+-   In Jenkins, a pipeline is a collection of events or jobs
+-   which are interlinked with one another in a sequence.
+-   It is a combination of plugins that support the integration and 
+    implementation of continuous delivery pipelines using Jenkins.
+-   CI/CD is allows developers to quickly and automatically test, package, and deploy their applications    
+-   the developers’ code gets integrated several times a day.
+    Whenever a developer checks-in the code, each time the change is verified by an automated pipeline(server) and gives early feedback, in case if there are any bugs.
+-   It comes after CI and it is the ability to introduce changes with every commit, making the code ready for
+    production so that it can be deployed to production on demand and as a routine activity
+    Code changes can be like new features, bug fixes, updates, configuration changes, etc.
+
+#   How to install Jenkins and login in to Jenkins as an Administrator?
+-------------------------------------------
+ Jenkins installation on ubuntu 18.04
+
+    # Prerequisites:
+    -   One Ubuntu 18.04 server
+    -   Java 8 or 11 installed
+
+    # STEPS:
+        Step1 :
+        - Install java OpenJDK 11:
+            sudo apt install openjdk-11-jdk
+
+        Step 2 :
+        - Installing Jenkins:
+        - Add the repository key to the system:
+            wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+        - Debian package repository address to the server’s sources.list:
+            sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+        - Install Jenkins and its dependencies: 
+            sudo apt install jenkins
+
+        Step 3 :
+        - Starting Jenkins:
+        - Start and status of jenkins:
+            sudo systemctl start jenkins.service
+            sudo systemctl status jenkins
+
+        Step 4 :
+        - Opening the Firewall:
+        - Jenkins runs on port 8080. Open that port using ufw:
+            sudo ufw allow 8080
+            sudo ufw allow OpenSSH
+            sudo ufw enable    
+            sudo ufw status   
+
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts-jdk11
+docker run --rm -d --name vudejenkins -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+docker run -p 8080:8080 -p 50000:50000 --name=vudejenkins -d jenkins/jenkins
+docker run --name vudejenkins -v myvoll:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins
+docker run -p 8080:8080 --name=vudejenkins -d -p 50000:50000 jenkins/jenkins
+
+hostname -I | awk '{print $1}'
+curl ifconfig.me
+
+i created container, and opened port 8080 but iam unable access jenkins
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins
+spec:
+  containers:
+  - name: jenkins
+    image: jenkins:latest
+    ports:
+    - containerPort: 8080
+--------------------------------
+apiversion: apps/V1
+kind: Deployment
+metadata:
+   name: jenkins
+   labels: 
+     app: jenkins
+spec:
+   replicas: 1
+   selector:
+      matchlabels:
+         app: jenkins
+    template:
+      metadata: 
+         app: jenkins
+      spe:        
+        container:
+         - name: jenkins-container
+           image: jenkins 
+           ports:
+           - containerport: 8080    
+---------------------------------
+apiversion: V1
+kind: service
+metadata:
+   name: service-np
+   labels:
+     app: jenkins
+spec:
+  selector:
+    app: jenkins
+  type: NodePort
+  ports:
+   - nodeport: 31000
+     port: 80
+     targetport: 80
+-----------------------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000
+  selector:
+    app: jenkins
+-------------------
+1. /.rke remove --force
+2. /.rke up 
+3. cp kube_config_cluster.yml  /home/vudeadmin/.kube/config  
+4. cp ~/.kube/config ~/.kube/configp
+-----------------------------
+kubectl taint nodes <<node-name>> example-key=value:NoSchedule
+---------------------------------------------------------------------
+- Entrypoint:
+. This is the flow of trenton continues integration
+. actual tentron ci we are using pipeline instad of of manual configuration
+. we can store configuration inside repository
+. in genarally what job we have to do
+. job we have scm from bitbucket and build,test,deploy
+. and pull request from bitbucket
+. build trigger job we can add required parameters
+. user pull request and code commit from required branch
+. This job runs every 4 hours and runs jobs triggered by users from Bitbucket
+. We can use pipeline also agent as docker
+
+- Build, unit tests, code quality checks, ... jobs:
+. clone from trenton repository.
+. Push build artifacts to the storage 
+
+- Status notifier job -post-build:
+. Send pass or fail status in Builds tab in pull request
+. Send e-mail to the user
+
+- Maintenance jobs:
+. We need to make sure nfs 
+. If it is more than 70% used space we should clean the oldest artifacts.
+- cleanup
+. We find the oldest files and remove them. It should also clean nodes from old Docker images.
+
+- Bitbucket integration with jenkins:
+
+----------------------------------------------------------------------------
+Docs understood points:
+**********************
+- This doc is to show the entire flow of tentron ci and it will shows differente steps and stages:
+
+. Trenton ci instead manual we can use jenkins file like pipeline job
+. we know the create to create a what kind of job like job as HUD
+. In the bitbucket we will create a repository under the repositoty to create branch like like master.
+. The devoloper commit the code like master branch/feature branch
+. Then we have to integrate jenkins with bitbucket
+. Create a pipeline job agents as docker
+. In the job we can give buils tabs,emails,and pull request it will avaoid the confusion of developer
+  and also give build parameter
+. The job implementation that means jenkins file stored in bitbucket
+. To setup the build trigger as every 4hours, If any changes in remote repository automatically 
+  the code willbe build trigger in every 4hours
+. The build trigger and unit test run parallel
+. If the build is successfull to merge the pull request  
+
+- Buils, unit test,code quality check:
+
+. lone the repository then if any merge changes locally the build is parallel like build,unit test, 
+  code quality check
+. Then we have to push artifats in to artifast storage
+. once done build we can set up the build notification
+. It is notified the the result of if is build success or fail then send to emil
+
+- Maintenance jobs:
+. we can use storage type like NFS storage
+. If storage is more than 70% space used we can set the email alert
+. And then to clean the oldest artifacts from the artifacts repository
+
+- nodes clean-up
+. we need to remove jenkins work place from old files
+. we have to find old files and remove them and also clean nodes from old docker images
+--------------------------------------# Kubernetes agents can access local persistent storage
+
+# SECTION :
+    - Kubernetes agents can access local persistent storage
+
+    STEP 1 :
+        - Kubernetes supports many types of storage class and volumes
+        - In this scenario we can use the NFS storage class
+
+        # create storageclass
+            kubectl apply -f storage.yml -n <<namespace>>
+
+        # get sc
+            kubectl get sc
+
+        # describe sc
+            kubectl describe sc
+
+        # delete sc
+            kubectl delete sc <<scname>> -n <<namespace>>
+
+    STEP 2 :
+        - Create a hostPath PersistentVolume
+        - In this section, we'll create a hostPath PersistentVolume
+        - Kubernetes supports hostPath for development and testing on a single-node cluster
+        - A hostPath PersistentVolume uses a file or directory on the Node to attached storage
+        - Here is the configuration file for the hostPath PersistentVolume pv.yml
+
+        # create pv
+            kubectl apply -f pv.yml -n <<namespace>>
+
+        # get pv
+            kubectl get pv
+
+        # describe pv
+            kubectl describe pv vude-pv
+
+        # delete pv 
+            kubectl delete pv vude-pv -n <<namespace>>
+
+    STEP 3 :
+        - Create a PersistentVolumeClaim
+        - Pods use PersistentVolumeClaims to request physical storage
+        - In this section, we create a PersistentVolumeClaim that requests a volume of at least
+          three gibibytes that can provide read-write access for at least one Node.
+        - Here is the configuration file for the hostPath PersistentVolumeClaim pvc.yml  
+
+        # create pvc
+            kubectl apply -f pvc.yml -n <<namespace>>
+
+        # get pvc
+            kubectl get pvc -n <<namespace>>
+
+        # describe pvc
+            kubectl describe pvc vude-pvc -n <<namespace>>
+
+        # delete pvc
+            kubectl delete pvc vude-pvc -n <<namespace>>
+
+        - After we created the PersistentVolumeClaim, If the control plane finds a suitable PersistentVolume
+          with the same StorageClass, it binds the claim to the volume.  
+
+    STEP 4 :   
+        - Create a Pod uses PersistentVolumeClaim as a volume
+        - Now it's time to create a Pod that uses our PersistentVolumeClaim as a volume.
+        - To configuration file for the Pod looks like this pv-pod.yml
+
+        # create pod
+            kubectl apply -f pod.yml -n <<namespace>>
+
+        # get pods
+            kubectl get pods pod.yml -n <<namespace>>
+
+        # describe pod
+            kubectl describe pod pod.yml -n <<namespace>>
+
+        # delete pod
+            kubectl delete pod pod.yml -n <<namespace>>
+
+        # edit pod
+            kubectl edit pod pod.yml -n <<namespace>>
+-----------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rjamapax
+  name: vude-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins:lts
+        ports:
+         - name: http-port
+           containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+ namespace: rjamapax
+ name: vude-svc
+ labels:
+  app: jenkins
+spec:
+ type: NodePort
+ ports:
+ - port: 8080   
+   protocol: TCP
+ selector:
+  app: jenkins
+--------------------------------------------
+1. which pipeline we are using in our project ?
+2. which tool we have to use code quality checking ?
+3. which webserver we are using deploying ?
+4. 
+---------------------------------------------
+ Jenkinsfiles:
+    # Entrypoint :
+    - In the jenkins pipeline, first we need to pass the parameters like Build, Test, Promote, ent_ssd_test revision
+    - Then Triggers Main job with the above parameters
+    - Then next step will be to clean up the work space
+
+    # Main job :   
+    - In the pipeline we can pass the parameters and then agent is none then next stage will be pull request 
+      and you can setup the environment also
+    - We can use a agent as docker then next stages are code commit and pull request.
+    - Under the stage we can create steps one by one
+    - To build the code by using build steps like build stage   
+    - Next stage will be code quality check under we can mention steps
+    - Next stage will be Merge, the changes from develop locally 
+
+-----------------------------

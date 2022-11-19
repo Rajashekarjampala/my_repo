@@ -1,0 +1,142 @@
+    SECTION 12 :
+
+    # New Trenton CI Architecture :
+    # This below doc is to show the flow of tentron ci and it will shows differente stages and steps:
+
+        STEP 1 :
+        # What jobs do we have here
+
+            - Trenton ci instead manual we can use jenkins file like pipeline job
+            - we know the create to create a what kind of job like job as HUD
+            - In the bitbucket we will create a repository under the repositoty to create branch like feature,   master.
+            - The devoloper commit the code like master branch/feature branch
+            - Then we have to integrate jenkins with bitbucket
+            - Create a pipeline job agents as docker
+            - In the job we can give buils tabs,emails,and pull request it will avaoid the confusion of developer
+              and also give build parameter
+            - The job implementation that means jenkins file stored in bitbucket
+            - To setup the build trigger as every 4hours, If any changes in remote repository automatically 
+              the code will be build trigger in every 4hours
+            - The build trigger and unit test run parallel
+            - If the build is successfull to merge the pull request   
+
+        STEP 2 :
+        # Build, unit test,code quality check:
+
+            - Clone the repository then if any merge changes locally the build is parallel like build,unit test, 
+              code quality check
+            - Then we have to push artifats in to artifast storage
+            - once done build we can set up the build notification
+            - It is notified the the result of if is build success or fail then send to emil
+
+        STEP 3 :
+        # Maintenance jobs:        
+        # NFS cleanup :
+            - we can use storage type like NFS storage
+            - Check how much space is used on NFS/other storage
+            - If storage is more than 70% space used we can set the email alert
+            - And then to clean the oldest artifacts from the artifacts repository
+
+        STEP 4 :
+        # nodes clean-up
+            - we need to remove jenkins work place from old files
+            - we have to find old files and remove them and also clean nodes from old docker images
+            - Find old workspaces and delete them
+            - Delete old directories starting with git
+
+        STEP 5 :     
+        # Refresh reference clones  
+            - We need a job that will refresh local clones from time to time on all nodes.
+            - Refresh reference clone and create new ones if do not exist
+            - List of repositories should be easy to change  
+
+    # Before Build our job we can fallow below steps :
+
+        STEP 1 :
+            - First we need to set up bitbucket server for SCM tool
+            - we have many advanced features in bitbucket server(SCM)
+            - Like clone repo, create branch, create pull request,commit code, merge, build the code all 
+              these things are we can do here        
+            - Developer always commit the code into featue branch
+            - New or Updated code is push to the bitbucket and also pull from bitbucket 
+
+        STEP 2 :
+            - After created jenkins job we need to download the build plugin
+            - Go to Manage jenkins->Managage plugins then you can search and download plugin
+            - You can choose the build plugin its depends on our requirement like maven
+            - Then you need to setup build trigger like build periodically, poll SCM
+            - Build periodically nothing but You can create a schedule for the job to specified 
+              like month,day,week, hour, and It might be tests that should be run periodically.
+            - Poll SCM polls the SCM periodically for checking if any changes/ new commits  
+              and triggers the job if new commits where pushed.
+
+    # Jenkinsfiles
+
+        # EntrypointTrenton.jenkinsfile :    
+            - Genarally A build parameter allows us to pass data into our Jenkins jobs
+            - In the jenkins pipeline, first we need to pass the parameters like Build, Test, Promote, ent_ssd_test
+              revision, Branch name,E-mail notifications
+            - The Agent as built-in nothing but built-in node was renamed from "master node" to "built-in node" in  
+              Jenkins
+            - The main stages block contains a series of steps in a pipeline  
+            - Then Triggers Main job with the above parameters
+            - Then next step will be to clean up the work space
+            - There is a way to clean up a workspace in Jenkins, clean up the workspace before or after build 
+            - Then we have to build job with our required parameters
+
+        # Main.jenkinsfile :   
+            - In the pipeline we can pass the parameters like WORKFLOW_TYPE,COMMIT_HASH,ENT_SSD_TEST_REVISION,  
+              PULL_REQUEST_ID,
+            - And then agent is none then next stage will be pull request
+
+        1.First stage will be pull request 
+            - You can setup the environment step
+            - We can use a agent as docker then add the image with arg
+
+        2.second stage is code commit check and pull request    
+            - Under the stage we can create steps one by one
+            - Like cleanWorkspace, cloneRepository url, etc....
+
+        3.Third stage will be Build and basic tests are run parallel
+            - To build the code by using build steps like build stage   
+            - Next stage will be code quality check under stage we can mention steps
+
+        4.last stage will consider as merge stage    
+            - In the Merge stage, Any changes from develop locally automatically build
+            - Then next step is clean up the work place.
+            - We can set up email alert post build like success or unsuccess and we can find via console output
+
+        # Build.jenkinsfile :
+            - In the build jenkins file first we need to pass the parameters
+            - parameters like TRENTON_COMMIT_HASH, UPSTREAM_BUILD_NUMBER, ENT_SSD_TEST_REVISION etc...
+
+        1.first will be Build firmware targets with agent is none
+            - I describe the details I like to store in each build, how I capture these details,
+            - And how I make them available to the firmware,and Configure the target
+            - We can take agent as docker and under the steps we can use docker image and arg  
+
+        2.second stage is run then we have to add build stage  
+            - under the build stage we have to add the build steps,like target, node name, clean up workspace
+              cloneRepository url, Build firmware
+
+        3.Third stage will be to Publish artifacts  
+            - The final stage is to publish the artifacts that means to copy the artifacts.
+            - Then next step will be to run the build steps and then clean work space        
+
+        # CodeQualityChecks.jenkinsfile :
+            - Here also we can pass the parameters in the pipeline like TRENTON_COMMIT_HASH,ENT_SSD_TEST_REVISION,
+              UPSTREAM_BUILD_NUMBER, UPSTREAM_BRANCH
+            - We can take agent as none and we can run the test casess parallale
+
+        1.first stage will be run the test casess
+            - This is the stage where you configure your CI/CD to execute the tests that are in your codebase.
+            - Under the stage we can use agent as docker and we run steps for the image and arg
+            - We can run the steps like to print The node name, cloneRepository and clean Workspace
+
+        2.second stage Doxygen check
+            - Then we can take docker as agent use docker image with arg
+            - We can run the steps like to print The node name, cloneRepository and clean Workspace
+
+        3.Third stage is stage Klocwork
+            - Under the docker agent steps to clean the work space and use image and args
+            - We can run the steps like to print The node name, cloneRepository and clean up work space                              

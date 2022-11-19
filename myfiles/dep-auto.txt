@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Clean-up and create namespace
+function namespace() {
+
+   echo "Clean-up & create a new namespace :: $1"
+   kubectl delete all --all -n $1
+   kubectl delete pvc --all -n $1
+   kubectl delete services --all -n $1
+   kubectl create ns $1
+   echo "Clean-up & create a new namespace"
+}
+
+function deployment() {
+   echo "Bring up Deployment => START"
+   kubectl apply -f /opt/vude/assignments/etcd/specs/deployments/start.yml
+   echo "Deployment ACTIVE => DONE"  
+}
+
+function svcs() {
+   echo "Bring up Service => START"
+   kubectl apply -f /opt/vude/assignments/etcd/specs/svc/start.yml
+   echo "Service ACTIVE  => DONE"
+}
+
+
+function main() {
+  namespace $1
+  deployment
+  svcs
+}
+
+# Arguments :: $1 = namespace(etcdapis)
+main $1
+
+

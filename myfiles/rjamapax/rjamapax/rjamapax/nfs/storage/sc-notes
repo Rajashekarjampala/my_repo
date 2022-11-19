@@ -1,0 +1,8 @@
+# create storageclass
+kubectl apply -f storage.yml -n rjamapax
+# get sc
+kubectl get sc
+# describe sc
+kubectl describe sc
+# delete sc
+kubectl delete sc <scname> -n rjamapax

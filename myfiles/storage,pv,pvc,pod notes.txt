@@ -1,0 +1,140 @@
+storage class
+
+*Dynamic provisioning uses an API object called storage class (“StorageClass”) 
+*where you configure provisioner to dynamically create persistent volumes when requested using a PVC.
+*Storage classes are created part of the kubernetes cluster by the administrator 
+*Different classes might map to backup policies determined by the cluster administrators.
+*Users can then request storage by specifying the storage class and the size of the volume needed in their claims
+
+Storage class configures:
+
+*StorageClass contains the fields provisioner, parameters, and reclaimPolicy
+*provisioner: determines what volume plugin is used for provisioning PVs
+*reclaim policy: specified the reclaimPolicy field of the class, which can be either Delete or Retain
+*parameters: may be accepted depending on the provisioner like nfs-server, path,readonly
+
+NFS-storage class:
+
+step1: vi storage-class.yml
+step2: to create yml file like below
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: <storage-classname-nfs>
+provisioner: example.com/external-nfs
+parameters:
+  server: <nfs-server-ip>
+  path: <exported by the NFS server path>
+  readOnly: "false"
+
+step3: kubectl apply storage-class.yml 
+step4: kubectl get sc 
+
+
+------------------------------------------------------------------------------------
+
+PV:
+PV is the "physical" volume on the host machine that stores your persistent data.
+pv is a piece of storage in the cluster,
+pv is dynamically provisioned using Storage Classes
+pv available storage let's say you have 100Gi
+pvc You request from Persistent Volume, let's say you request 10Gi you'll get it but if you request 110Gi you won't get it.
+
+step1: vi pv.yml
+step2: to create yml file like below
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: <pv-name>
+  namespace: <our-namespace>
+spec:
+  capacity:
+    storage: <storage>
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: <Recycle/delete>
+  storageClassName: <nfs>
+  nfs:
+    path: <NFS-Server-mount-path>
+    server: <nfs-server-ip>
+
+step3: kubectl apply -f pv.yml
+step4: kubectl get pv
+----------------------------------------------------------------------
+
+PVC:
+PVC is a request for the platform to create a PV for you, and you attach PVs to your pods via a PVC
+PVC is a request for storage by a user which can be attained from PV
+Pods consume node resources and PVCs consume PV resources.
+Claims can request specific size and access modes
+
+step1: vi pvc.yml
+step2: create yml file like below
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <pvc-name>
+  namespace: <our-namespace>
+spec:
+  storageClassName: <nfs>
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: <required-storage>
+
+step3: kubectl aplly -f pvc.yml
+step4: kubectl get pvc
+----------------------------------------
+
+Deploy and Create the POD
+
+step1: vi pd.yml
+step2: create yml file like below
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <pod-name>
+  namespace: <our-namespace>
+spec:
+  volumes:
+    - name: <volume-name>
+      persistentVolumeClaim:
+        claimName: <claim-name>  ------> pvc name
+  containers:
+    - name: <container-name>
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "vude-nfs-nginx"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: <volume-name>
+
+step3: kubectl apply -f pod.yml
+step4: kubectl get pods
+step5: kubectl exec -it <podname> -n <namespce> -- bash
+step5: ls /usr/share/nginx/html/
+
+----------------------------------------------------------
+
+persistent volume (PV) is the "physical" volume on the host machine that stores your persistent data. A persistent volume claim (PVC) is a request for the platform to create a PV for you, and you attach PVs to your pods via a PVC.
+
+
+Persistent Volume - Available storage let's say you have 100Gi
+Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi you'll get it but if you request 110Gi you won't get it.
+
+A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by server/storage/cluster administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like node.
+A PersistentVolumeClaim (PVC) is a request for storage by a user which can be attained from PV. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods consume node resources and PVCs consume PV resources.. Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany.
+
+PersistentVolume(PV) and PersistentVolumeClaim(PVC) are the resources APIs provided by the Kubernetes. PV is a piece of storage which supposed to preallocated by an admin. And PVC is a request for a piece of storage by a user.
+
+*the main goal of storage classes is to eliminate the need for cluster administrators to pre-provision storage and allow them  to be created on-demand
+
+
+

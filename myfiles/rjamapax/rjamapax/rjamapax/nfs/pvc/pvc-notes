@@ -1,0 +1,8 @@
+# create pvc
+kubectl apply -f pvc.yml -n rjamapax
+# get pvc
+kubectl get pvc -n rjamapax
+# describe pvc
+kubectl describe pvc vude-pvc -n rjamapax
+# delete pvc
+kubectl delete pvc vude-pvc -n rjamapax

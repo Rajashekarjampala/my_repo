@@ -1,0 +1,9 @@
+LodStash
+********
+https://coralogix.com/blog/elasticsearch-logstash-kibana-on-kubernetes/
+
+https://towardsdatascience.com/the-basics-of-deploying-logstash-pipelines-to-kubernetes-94a470ad34d9
+
+https://alexander.holbreich.org/logstash-kubernetes/
+
+https://www.youtube.com/watch?v=b4wOV6vlqPU

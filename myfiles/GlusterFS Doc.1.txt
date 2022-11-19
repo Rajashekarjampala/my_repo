@@ -1,0 +1,151 @@
+  
+1.What's GlusterFS.?
+
+* GlusterFS is a scalable network filesystem in userspace.
+* GlusterFS is free and open-source software.
+* GlusterFS is managed and orchestrated like any other app in Kubernetes.
+* It is used for storage for large scale files.
+* it advantages is any applications thats need access a file quickly and delivered it to user or our application.
+  and its faster than our relative file systems like NFS.
+......................................................................................
+
+2.How to install GlusterFS in Ubuntu20 VMs.?
+
+* We have install on glusterFS package on ubuntu server by using command of
+ 	sudo apt install -y glusterfs-server glusterfs-client.
+
+* Then we have to start and status our glusterFS application.
+	sudo systemctl start glusterd.service
+	sudo systemctl status glusterd.service
+
+* Then we have to group them. like we can open the created host file like
+	 vi /etc/hosts.
+	 ex:ip adress node1
+	    ip adress node2
+ 
+* And then we can add our nodes ip address in "vi /etc/hosts" file.
+* these nodes are talk to each other
+
+* Then now we make sure need to group them single storage pool 
+* Then we check the glusterFS peer status.
+          gluster peer probe node.
+          gluster peer status.
+....................................................................................
+
+3.How to Integrate with Kubernetes.?
+
+# Replicated volume creation:
+
+* Then we make directory in worker nodes 
+	mkdir /gluster
+
+* And then we create volume by using command 
+ 	gluster volume create <volumename> replicas 2 node1:/gluster/brick1
+
+* Then we need to check the replicated volume is created or not.
+	gluster volume info
+
+* Then start and check the gluster volume status
+	gluster volume start <volumename>
+        gluster volume status.
+	gluster volume list.
+	gluster volume info.
+
+#Volume Mount:
+
+* Create a directory for mount a volume in client machine. 
+	ex: mkdir /mnt/volume1 
+
+* then go to mount the volume under this derectory
+	mount -t glusterfs <ourworkernode>:<volumename> <clientmachinevolumedirectory>
+	mount | grep volume
+
+* then we have to change directory to client machine volume directory
+	ex:cd /mnt/volume1/
+	 
+* For example to know our file is shared or not. testing purpose I Have a file creating this folder.
+	touch file1 
+  automatically its succsessfully created file in all worker nodes.
+.....................................................................................................
+
+4.#Sample-PV Manifest file:
+
+* Create a manifest file for PV
+* vi glusterfs-pv.yaml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: glusterfs
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/volume1"
+
+* kubectl apply glusterfs-pv.yaml
+* kubectl get pv
+.......................................................................................
+
+
+5.#Sample-PVC Manifestfile:
+
+*Create a manifest file for PVC
+	vi glusterfs-pvc.yaml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: glusterfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+*kubectl apply glusterfs-pvc.yaml
+*kubectl get pvc
+.............................................................................................
+
+5.# NGINX pod that uses the GlusterFS on PVC:
+
+*Create a manifest file for pod with attach PVC
+	vi glusterfs-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod1
+  labels:
+    name: nginx-pod1
+spec:
+  containers:
+  - name: nginx-pod1
+    image: gcr.io/google_containers/nginx-slim:0.8
+    ports:
+    - name: web
+      containerPort: 80
+    volumeMounts:
+    - name: gluster-vol1
+      mountPath: /mnt/volume1
+  volumes:
+  - name: gluster-vol1
+    persistentVolumeClaim:
+      claimName: gluster1 <1>
+
+kubectl apply glusterfs-pod.yaml
+kubectl get pods -o wide
+
+...................................................................................................
+
+
+
+
+

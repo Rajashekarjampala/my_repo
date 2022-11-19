@@ -1,0 +1,160 @@
+set-10
+ex-2
+
+'''
+
+2.  Write a function to take a dict, number X,Y as arguments. 
+
+    If the SUM of (dict key + dict val) is PRIME and > sum of number (X+Y)
+
+    then add it to new dict. 
+
+    Finally iterate and return the new dict.
+
+
+
+    Example : 
+
+            testDict={1:4,10:2,3:4,4:7,6:11,12:9}
+
+            numX=2
+
+            numY=10
+
+
+
+            result=func_exec(testDict,numX,numY)
+
+            print(result)
+
+            Expected Output : {6:11}}
+
+
+
+    Example : 
+
+            testDict={1:4,10:2,3:4,4:7,6:11,12:9}
+
+            numX=2
+
+            numY=4
+
+
+
+            result=func_exec(testDict,numX,numY)
+
+            print(result)
+
+            Expected Output : {3:4,6:11}}
+
+        
+
+        :param org_dic: Original dict passed by the User
+
+        :param numx: Numberx passed by the User. Type is INT.
+
+        :param numy: Numbery passed by the User. Type is INT.
+
+        :return: return dictionary with filtered values ONLY.  
+
+
+
+Solution Steps:
+
+*************
+
+Iterate the dictionary with key and values
+
+    Add the dict key and value (key+value)
+
+    Check If (key+value) is prime number
+
+    Check If prime is > sum of (numberX+numberY) 
+
+        If yes:
+
+            Add to new dictionary
+
+        else:
+
+            continue the loop
+
+    Finally return the new dictionary          
+
+'''
+
+#define Function 
+
+def check_prime(Org_dict,NumX,NumY):
+
+  #define new dict
+
+  new_dict={}
+
+  #iterates both key and value from the original dict 
+
+  for _key,_value in Org_dict.items():
+
+    #storing sum  of present key and value
+
+    sum=_key+_value  
+
+    #loop for cofactors  
+
+    for cofactor in range(2,sum):
+
+        #checking for prime cofactor divisibility
+
+      if(sum%cofactor==0):
+
+        break
+
+    else:
+
+        #checking for the sum of present key and value is greater than Number X and Number Y
+
+      if(sum>NumX+NumY):
+
+          #add to new dict
+
+        new_dict[_key]=_value
+
+  #finally return new dict      
+
+  return new_dict      
+
+  
+
+#calling function
+
+#Testcase 1
+
+result=check_prime({1:4,10:2,3:4,4:7,6:11,12:9},2,10)
+
+print("\n")
+
+print('Testcase 1 Output : {}'.format(result))
+
+print("\n")
+
+print("-"*50)
+
+print("\n")
+
+# ------------------------------------------------------------------#
+
+#Testcase 2
+
+result=check_prime({1:4,10:2,3:4,4:7,6:11,12:9},2,4)
+
+print("\n")
+
+print('Testcase 2 Output : {}'.format(result))
+
+print("\n")
+
+print("-"*50)
+
+print("\n")
+
+# ------------------------------------------------------------------#

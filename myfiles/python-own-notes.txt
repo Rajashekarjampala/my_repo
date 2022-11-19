@@ -1,0 +1,476 @@
+'''1. Write a program to print the ASCII value of a character.'''
+
+from asyncore import loop
+
+
+x=input('enter a charecter: ')
+print(ord(x))
+
+
+'''2. Write a program that asks two people for their names; stores the names in variables called name1 and
+name2; says hello to both of them'''
+
+name1=input('enter a name:')
+name2=input('enter a name:')
+print('hello ',name1,name2)
+
+'''3.Write a Python program which accepts the radius of a circle from the user and compute the area.'''
+
+r=int(input('enter radius '))
+x=3.14*r**2
+print(x)
+
+
+'''3. Write a Python program which accepts the user's first and last name and print them in reverse order
+with a space between them..'''
+name1=input('enter name: ')
+name2=input('enter name: ')
+print(name2,name1)
+
+
+'''Write a Python program that will accept the base and height of a triangle and compute the area.
+'''
+height=int(input('enter height:'))
+base=int(input('enter base:'))
+x=0.5*height*base
+print('area of triangle is:',x)
+
+
+'''Write a Python program to solve (x + y) * (x + y). '''
+x=int(input('enter number x: '))
+y=int(input('enter number y: '))
+
+a=(x + y) * (x + y)
+print('final result:',a)
+
+
+'''Write a python program to sum of the first n positive integers '''
+n=int(input('enter number x: '))
+sum=0
+for i in range(1,n+1):
+  sum+=i
+print(sum)
+
+
+'''Write a Python program to swap two variables. '''
+a=10
+b=20
+a,b=b,a
+print(b)
+
+
+'''Write a program to enter two integers and then perform all arithmetic operations on them. '''
+a=int(input('enter x: '))
+b=int(input('enter y: '))
+
+def check_val(x,y):
+  sum=x+y
+  return sum
+  
+print(check_val(a,b))
+
+
+'''Write a program to perform string concatenation''' 
+a='Raj is intelligent '
+b='Rak is lover boy '
+
+print(a+'and '+b)
+
+
+'''Write a program to calculate simple interest.''' 
+p=int(input('enter p:'))
+t=int(input('enter t:'))
+r=int(input('enter r:'))
+
+i=(p*t*r)/100
+
+print('i is :',i)
+
+'''Write a program to calculate simple interest.''' 
+p=int(input('enter principle:'))
+t=int(input('enter time:'))
+r=int(input('enter rate:'))
+
+def simple_int(x,y,z):
+  i=(x*y*z)/100
+  return i
+
+print('intrest', simple_int(p,t,r))
+
+
+'''Write a program that prompts users to enter two integers x and y. The program then calculates and
+display xy''' 
+x=int(input('enter x:'))
+y=int(input('enter y:'))
+
+s=x**y
+print('result: ',s)
+
+
+'''Write a program that calculates numbers of seconds in a day.''' 
+days=int(input('enter days '))
+result=60*60*24*days
+print(result)
+
+
+'''Write a program that calculates numbers of seconds in a day.''' 
+day=int(input('enter days '))
+result=60*60*24*day
+print(result)
+
+
+'''Write a program to calculate salary of an employee given 
+  his basic pay(to be entered by the user), HRA
+  =10 percent of basic pay, TA=5 percent of basic pay. 
+  Define HRA and TA as constants and use them to
+  calculate the salary of the employee''' 
+
+basic_pay=int(input('enter basic pay salary: '))
+
+total_salary=(basic_pay)+(10/100*basic_pay)-(5/100*basic_pay)
+
+print(total_salary)
+
+
+'''Write a program to print the digit at one’s place of Number.
+'''
+x=12345
+x%=10
+print(x)
+
+
+'''Write a program to calculate average of two numbers
+'''
+x=int(input('enter first number: '))
+y=int(input('enter second number: '))
+
+s=(x+y)/2
+
+print('avarage: ',s)
+
+
+'''Write a program to calculate area of triangle using Heron’s formula. ( Hint: Heron’s formula is :
+area = sqrt(s*(s-a)*(s-b)*(s-c))'''
+
+a=int(input('enter a : '))
+b=int(input('enter b : '))
+c=int(input('enter c : '))
+
+s=a+b+c
+area = ((s*(s-a)*(s-b)*(s-c)))**(1/2)
+
+print('area of triangle: ',area)
+
+
+'''Distance between two points'''
+x1=int(input('enter x1: '))
+x2=int(input('enter x2: '))
+y1=int(input('enter y1: '))
+y2=int(input('enter y2: '))
+
+s=((x2-x1)**2)+((y2-y1)**2)
+
+print('result: ',s)
+
+***************************************************************************************
+****************************************************************************************
+
+Control Statements :
+-------------------
+Conditional control Statement
+
+1. If statement
+2. If –else statement
+3. Nested if statement
+3. If-elif-else statement
+
+
+''' 1. Write a program to find larger of two numbers.'''
+
+n1=int(input("enter : n1 ")) 
+n2=int(input("enter : n2 "))
+
+if (n1>n2):
+  print("{} is greater".format(n1))
+elif(n1==n2):
+  print("{a} is equal to {b}".format(b=n1,a=n2))
+else:
+  print("{} is greater".format(n2))
+  
+-----------------------------------------------------------------------------------------
+
+'''2. A Company decides to give bonus to all its employees on Diwali. A 5% bonus on salary is given to the
+male workers and 10% bonus on salary to the female workers. Write a Python program to enter the salary
+of the employee and gender of the employee. If the salary of the employee is less than Rs/- 10,000 then
+the employee gets an extra 2% bonus on salary. Calculate the bonus that has to be given to the employee
+and display the salary that the employee will get.'''
+
+salary=int(input("Enter the salary: "))
+gender=input("Enter the gender: ")
+
+if (gender=='male'):
+  if (salary<10000):
+    print("employee salary: ",salary+salary*(5/100)+salary*(2/100))
+
+  else:
+    print("employee salary: ",salary+salary*(5/100))
+
+elif(gender=="female"):
+  if  (salary<10000):
+    print("employee salary: ",salary+salary*(10/100)+salary*(2/100))
+
+  else:
+    print("employee salary: ",salary+salary*(10/100))
+
+else:
+  print("enter incorrect details")
+
+------------------------------------------------------------------------
+
+'''4. Write a program to determine whether the character entered is a vowel or not.'''
+
+cha=input("enter charecter: ")
+
+if (cha in "aeiouAEIOU"):
+  print('vowel')
+else:
+  print("not vowel") 
+
+-------------------------------------------------------------------------------
+
+'''5. Write a program to find the greatest number from the three numbers'''
+n1=int(input("enter n1: ")) 
+n2=int(input("enter n2: "))
+n3=int(input("enter n3: ")) 
+
+if (n1>n2 and n1>n3):
+  print("{} is greater".format(n1))
+elif(n2>n1 and n2>n3):
+  print("{} is greater".format(n2))
+else:
+  print("{} is greater".format(n3))
+
+------------------------------------------------------------------------------------
+
+'''7. Write a program to calculate tax given the following conditions:
+If income is less than 1,50,000 then no tax
+If taxable income is 1,50,001 - 3,00,000 then charge 10% tax
+If taxable income is 3,00,001 - 5,00,000 then charge 20% tax
+If taxable income is above 5,00,001 then charge 30% tax'''
+
+'''7. Write a program to calculate tax given the following conditions:
+If income is less than 1,50,000 then no tax
+If taxable income is 1,50,001 - 3,00,000 then charge 10% tax
+If taxable income is 3,00,001 - 5,00,000 then charge 20% tax
+If taxable income is above 5,00,001 then charge 30% tax'''
+
+income=int(input("Enter income: "))
+
+if (income<150000):
+  print("No Tax")
+
+elif(income>150001 and income<=300000):
+  print("tax: ",income*(10/100))
+
+elif(income>300001 and income<500000):
+  print("tax: ",income*(20/100))
+
+elif(income>500001):   
+  print("tax: ",income*(30/100)) 
+
+--------------------------------------------------------------------------
+
+'''8. Write a program to enter the marks of a student in four subjects. Then calculate the total and aggregate,
+and display the grade obtained by the student. If the student scores an aggregate greater than 75%, then
+the grade is Distinction. If aggregate is 60>= and <75, then the grade is First Division. If aggregate is 50>=
+and <60, then the grade is Second Division. If aggregate is 40>= and <50, then the grade is Third Division.
+Else the grade is fail.'''
+
+s1=int(input("enter marks s1: "))
+s2=int(input("enter marks s2: "))
+s3=int(input("enter marks s3: "))
+s4=int(input("enter marks s4: "))
+
+avg=(s1+s2+s3+s4)/4
+print("avarage: ",avg)
+
+if (avg>=75 and avg<=100):
+  print("distinction")
+elif(avg>=60 and avg<75):
+  print("first division")
+elif(avg>=50 and avg<60):
+  print("second division")
+elif(avg>=40 and avg<50):
+  print("Failed")
+else:
+  print("failed")
+  
+-----------------------------------------------------------------------------------
+
+'''Write a program to read two numbers. Then find out whether the first number is a multiple of the
+second number.'''
+n1=int(input("Enter number n1: "))
+n2=int(input("Enter number n2: "))
+
+if(n1%n2==0):
+  print("n1 is multiple of n2: ")
+else:
+  print("n1 is not multiple of n2: ")
+
+---------------------------------------------------------------------------
+
+'''10. Write a program to take input from the user and then check whether it is a number or a character. If it
+is a character, determine whether it is in uppercase or lowercase'''
+
+cha=input("enter input: ")
+
+if (cha>='A' and cha<='Z' or cha>='a' and cha<='z' ):
+  if (cha>='A' and cha<='Z'):
+    print("upper case")
+
+  else:
+    print("lower case")
+    
+elif(int(cha)<=0 or int(cha)>0):
+  print("number")
+
+else:
+  print("invalid")
+  
+----------------------------------------------------------------------------
+
+'''11. Write a program that prompts users to enter a character (O, A,B,C,F). Then using if-elif-else construct
+display Outstanding, Very Good, Good, Average and Fail respectively.'''
+
+cha=input("enter charecter: ")
+
+if (cha=='O'):
+  print("outstanding")
+
+elif (cha=='A'):
+  print("very good")
+
+elif (cha=='A'):
+  print("good")  
+
+elif (cha=='C'):
+  print("Avarage")
+
+elif (cha=='F'):
+  print("Fail")
+
+else:
+  print("invalid charecter")  
+
+----------------------------------------------------------------------------
+
+For loop / While loop
+********
+
+'''5. Write a program to read the numbers until -1 is encountered. Find the average of positive number and
+negative numbers entered by the user.'''
+# for loop
+sp=0
+cp=0
+sn=0
+cn=0
+while(True):
+  n=int(input('enter number: '))
+  if (n==0):
+    break
+  elif (n<0):
+    sn=sn+n
+    cn=cn+1
+  elif (n>0):
+    sp=sp+n
+    cp=cp+1
+    
+print('avg of positive: ',sp/cp)  
+print('avg of nagitive: ',sn/cn)
+
+------------------------------------------
+  
+#1. Write a program using for loop to calcuate the average of first n natural numbers.
+# Using for loop
+n=int(input("enter a number: "))
+sum=0
+count=0
+for i in range(1,n+1):
+  sum=sum+i
+  count=count+1
+avg=sum/count
+print(avg)
+---------------------------
+#using while loop
+n=int(input("enter a number: "))
+sum=0
+count=0
+i=1
+while(i<=n):
+  sum=sum+i
+  count=count+1
+  i=i+1
+avg=sum/count
+print(avg)
+--------------------------
+'''2. Write a program to print the multiplication table of n, where n is entered by the user.'''
+# for loop
+n=int(input("enter a number: "))
+for i in range(1,11):
+  print(n,'*',i,'=',n*i)
+-----------------------------
+# while loop
+n=int(input("enter a number: "))
+i=1
+while(i<=10):
+  print(n,'*',i,'=',n*i)
+  i=i+1
+----------------------------------------
+'''3. Write a program using for loop to print all the numbers from n1-n2 thereby classifying them as even or
+odd.'''
+n1=int(input("Enter n1: "))
+n2=int(input("Enter n2: "))
+
+for i in range(n1,n2):
+  if (i%2==0):
+    print(i,'is Even number')
+
+  else:
+    print(i,'is Odd number')
+----------------------------------------------
+
+'''4. Write a program using for loop to calculate factorial of a number.'''
+n=int(input("Enter a number: "))
+fact=1
+for i in range(1,n+1):
+  fact=fact*i
+print(fact)
+----------------------
+# While loop
+'''4. Write a program using for loop to calculate factorial of a number.'''
+n=int(input("Enter a number: "))
+i=1
+fact=1
+while(i<=n):
+  fact=fact*i
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

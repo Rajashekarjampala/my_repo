@@ -1,0 +1,60 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: manual
+   namespace: rjamapax
+provisioner: kubernetes.io/no-provisioner
+#volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+------------------------------------
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+   name: esp-pv-volume   # name of the pv
+   namespace: rjamapax    # namespace where the p vis applied
+   labels:
+     type: local
+spec:
+   storageClassName: manual
+   accessModes:
+     - ReadWriteMany  # esp, studio and streamviewer can all write to this space
+   hostPath:
+     path: "/opt/vudenfs/vudedata/"
+   capacity:
+     storage: 10Gi  # volume size requested
+--------------------------------------------------
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: esp-pv
+   namespace: rjamapax
+spec:
+   storageClassName: manual
+   accessModes:
+     - ReadWriteMany # esp, studio and streamviewer can all write to this space
+   resources:
+     requests:
+       storage: 10Gi  # volume size requested
+
+----------------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vude-nginx-pod
+  namespace: rjamapax
+spec:
+  volumes:
+    - name: vude-nginx-storage
+      persistentVolumeClaim:
+        claimName: esp-pv
+  containers:
+    - name: vude-nfs-tests-nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "vude-nfs-nginx"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: vude-nginx-storage
+

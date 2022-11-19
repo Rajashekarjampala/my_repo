@@ -1,0 +1,91 @@
+# Section 1:
+- Installing NFS:
+  - sudo apt update
+  # installing nfs kernel-server
+  - sudo apt install nfs-kernel-server
+
+- Configuring NFS:
+  # Create an NFS Export Directory
+  - sudo mkdir -p </mnt/nfs_share>
+
+  # Remove restrictions in the directory permissions.
+  - sudo chown -R vudemaster:vudemaster </mnt/nfs_share/>
+
+  # Grant NFS Share Access to Client Systems:
+  # NFS server are defined in the /etc/exports file
+  - sudo vi /etc/exports
+
+  # export the NFS share directory
+  - sudo exportfs -arvf
+
+  # restart the NFS kernel server
+  - sudo systemctl restart nfs-kernel-server
+
+  # Allow NFS Access through the Firewall
+  - sudo ufw allow from <nfs-client-ip> to any port nfs
+  - sudo ufw status
+
+  # Install the NFS client server:
+  # install nfs-common packages
+  - sudo apt update
+  - sudo apt install nfs-common
+
+  # To create a mount point
+  - sudo mkdir -p </mnt/nfs_clientshare>
+
+  # Mounting the NFS share that is shared by the NFS server
+  - sudo mount <nfs-server-ip>:</mnt/nfs_share>  </mnt/nfs_clientshare> 
+
+  # Testing the NFS Share on Client System
+  - cd /mnt/nfs_share/
+  - touch file1
+
+  # NFS client system and check if the files
+  - ls -l /mnt/nfs_clientshare/
+
+# Section 2:
+- Create Storage class for NFS:
+  # create storageclass
+   - kubectl create -f storage.yml 
+
+- Create PV :
+  # create pv
+   - kubectl create -f pv.yml 
+
+- Create PVC :
+  # create pvc
+  - kubectl create -f pvc.yml -n rjamapax
+
+- Create POD :
+  # create pod
+   - kubectl apply -f pod.yml -n rjamapax
+
+# Section 3:
+- Debug commands :   
+  # Describe SC
+  - kubectl describe sc <sc-name>
+
+  # Describe PV
+  - kubectl describe pv <pv-name>
+
+  # Describe PVC
+  - kubectl describe pvc <pvc-name> -n <namespace>
+
+  # Describe POD
+  - kubectl describe pod <pod-name> -n <namespace>
+
+# Section 4:
+- delete commands :
+  # Delete SC
+  - kubectl delete sc <sc-name>
+
+  # Delete PV
+  - kubectl delete pv <pv-name>
+
+  # Delete PVC 
+  - kubectl delete pvc <pvc-name> -n <namespace>
+
+  # Delete POD
+  - kubectl delete pod <pod-name> -n <namespace>
+
+

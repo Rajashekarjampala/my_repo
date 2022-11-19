@@ -1,0 +1,41 @@
+SET-5
+------
+1. Write a function to take a list. Reverse and return the new list.
+    Example :
+        listA=[10,20,30,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [100,60,50,40,30,20,10]
+---------------------------------------------------------
+2. Write a function to take a list. Sort and return the new list.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [20,40,50,60,100,100,300]
+---------------------------------------------------------
+3. Write a function to take 2 lists. Use zip function to iterate the list and pick values that
+   are common at both indexes.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        listB=[1100,20,1300,40,50,160,1000]
+        result=func_exec(listA,listB)
+        print(result)
+        # 20 -> listA[1] == listB[1]
+        # 40 -> listA[3] == listB[3]
+        # 50 -> listA[4] == listB[4]
+        Expected Output : [20,40,50]
+-------------------------------------------------------
+4. Write a function to take a dict as argument. Sort the dict by keys and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,3:4,4:7,12:9,20:3,60:11}
+-----------------------------------------------------------------
+5. Write a function to take a dict as argument. Sort the dict by values and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:40,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,4:7,12:9,60:11,10:20,3:40}

@@ -1,0 +1,571 @@
+set-3
+*****
+'''1. Write a function to take a list as an argument. Remove all duplicates from the list. 
+Don't use any built-in. Check using if conditions.
+    Example : 
+        org_list=[1,2,3,4,5,6,7,8,9,10,11,12,1,1,2,4,4,5,6,7]
+        result=func_exec(org_list)
+        print(result)
+        Expected Output : [1,2,3,4,5,6,7,8,9,10,11,12]
+        :param org_list: Original list passed by the User
+        :return: New list with filtered values ONLY.'''
+
+#This function removes duplicates elements from list
+def check_dup(org_list):
+
+    #define an empty new list
+    new_mapper=[] 
+    # itarate the list
+    for i in org_list: 
+        #checking for an element is in an empty list, if an element is present it ignored as a duplicate
+        if (i not in new_mapper): 
+            #elements add to new list
+            new_mapper.append(i) 
+    #finally returns a new list without duplicates        
+    return new_mapper 
+    
+
+# Execution
+test_list=[1,2,3,4,5,6,7,8,9,10,11,12,1,1,2,4,4,5,6,7]
+result=check_dup(org_list=test_list)
+print("Final Result is :: {} ".format(result))
+-----------------------------------------------------
+'''2. Write a function to take a org_dict as an argument. Find the key that has maximum value and return the key.
+    Example : 
+        testorg_Dict={1:4,10:100,3:90,4:40,6:80,12:200}
+        result=func_exec(testorg_Dict)
+        print(result)
+        Expected Output : 12
+        Reason: Output is 12 since 12 has value of 200 which is greater than other values
+        :param org_list: Original list passed by the User
+        :return: New list with filtered values ONLY'''
+
+# This function is define maximum value and return the key
+def max_key(org_dic):
+
+    #stores list of values from org_dictionary
+    val=org_dic.values()    
+    #items method gives list of tuples from org_dictionary
+    # key and values iterates Simanatanously
+    for _key,_value in org_dic.items():           
+           #checking for largest value in the org_dictionary, if condition true it returns the key for that large value
+           if (max(val)==_value):
+              #finally returns the key of large value pair
+              return _key             
+
+# Execution
+test_Dict={1:4,10:100,3:90,4:40,6:80,12:200}
+result=max_key(org_dic=test_Dict,)
+print("Final Result is :: {} ".format(result))
+---------------------------------------
+'''3. Write a function to take a list, number X,Y,Z as arguments. 
+From the list pick the elements that are >er than (X+Y+Z). Add those elements to new list. Finally return the new list.
+    Example : 
+        org_list=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+        numX=10
+        numy=20
+        numZ=25
+        result=func_exec(org_list,numX,numY,numZ)
+        print(result)
+        Expected Output : [300,100,120,200,400]
+        :param org_list: Original list passed by the User
+        :param numX: Number X passed by the User. Type is INT.
+        :param numY: Number Y passed by the User. Type is INT.
+        :param numY: Number Z passed by the User. Type is INT
+        :return: New list with filtered values ONLY'''
+        
+#Tthis function define From the list pick the elements that are >er than (X+Y+Z)
+def pic_gre(org_list,numx,numy,numz):
+
+    #define an empty new list
+    new_mapper=[] 
+    # itarate the list
+    for i in org_list: 
+        # checking condition list of the elements greterthen sum of numx,numy,numz
+        if (i>(numx+numy+numz)): 
+            # #elements add to new list
+            new_mapper.append(i) 
+    # finally returns a new list 
+    return new_mapper  
+
+# Execution
+test_list=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+numx=10
+numy=20
+numz=25
+result=pic_gre(org_list=test_list,numx=numx,numy=numy,numz=numz)
+print("Final Result is :: {} ".format(result))          -----------------------------
+'''4. Write a function to take a list, number X,Y,Z as arguments.
+ From the list pick the elements that are <er than (X+Y+Z). Add those elements to new list. Finally return the new list.
+    Example : 
+        org_list=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+        numX=10
+        numy=20
+        numZ=25
+        result=func_exec(org_list,numX,numY,numZ)
+        print(result)
+        Expected Output : [1,2,4,5,6,7,8,9,11]
+        :param org_list: Original list passed by the User
+        :param numX: Number X passed by the User. Type is INT.
+        :param numY: Number Y passed by the User. Type is INT.
+        :param numY: Number Z passed by the User. Type is INT
+        :return: New list with filtered values ONLY'''
+
+# This function is define From the list pick the elements that are <er than (X+Y+Z)
+def pick_less(org_list,numx,numy,numz):
+
+    # #define an empty new list
+    new_mapper=[] 
+    # itarate the list
+    for i in org_list:
+        # checking condition list of the elements lessthen sum of numx+numy+numz
+        if (i<(numx+numy+numz)): 
+            # elements add to new list
+            new_mapper.append(i) 
+    # finally returns a new list
+    return new_mapper  
+
+# Execution
+test_list=[1,2,300,4,5,6,7,8,9,100,11,120,200,400]
+numx=10
+numy=20
+numz=25
+result=pick_less(org_list=test_list,numx=numx,numy=numy,numz=numz)
+print("Final Result is :: {} ".format(result))              -------------------------------------
+'''5. Write a function to take a dict, number X,Y as arguments. If the prod of (dict key * dict val) is > sum of number (X+Y), then add it to new dict. Finally iterate and return the new dict.
+    Example : 
+            testDict={1:4,10:2,3:4,4:7,6:11,12:9}
+            numX=20
+            numY=30
+            result=func_exec(testDict,numX,numY)
+            print(result)
+            Expected Output : {6:11,12:9}}
+              :param orgDict: Original dictionary passed by the User
+              :param numX: Number X passed by the User. Type is INT.
+              :param numY: Number Y passed by the User. Type is INT.
+              :return: New dictionary with filtered values ONLY'''
+
+def check_pro(org_dic,numx,numy):
+  #Define an empty new dictionary
+  new_mapper={} 
+  # Iterate the original dictionary and filter the values
+  for _key,_val in org_dic.items(): 
+    # if the condition is product of keyand value is greterthan sum of numx,numy
+    if (_key*_val>numx+numy): 
+      # If the condition is satisfied, add the key & value to the new dictionary
+      new_mapper[_key]=_val
+  #Finally return the new dic
+  return new_mapper 
+
+# Execution
+testDict={1:4,10:2,3:4,4:7,6:11,12:9}
+numx=20
+numy=30
+result=check_pro(org_dic=testDict,numx=numx,numy=numy)
+print("Final Result is :: {} ".format(result))
+-----------------------------------
+--------------------------------------
+set-4
+*****
+'''2. Write a function to take a list as an argument. Find all the elements that occur in ODD indexes.
+    Example : 
+        org_list=[1,2,300,4,5,6,7,2,8,9,10,100,11,2,200,10]
+        result=func_exec(org_list)
+        print(result)
+        Expected Output : [2,4,6,2,9,100,2,10]
+        :param orgList: Original list passed by the User
+        :return: ODD indexes from list ONLY'''
+
+#This function gives a new list with odd index elements in the original list
+def check_odd_ind(org_list):
+
+  #define an empty new list
+  new_mapper=[] 
+  # loop i value contains odd numbers
+  for i in range(1,len(org_list),2): 
+    #elements adds to new list from original list which are in odd indexs
+    new_mapper.append(org_list[i]) 
+  #finally return the new list with odd indexes elements 
+  return new_mapper  
+
+# Execution
+testList=[1,2,300,4,5,6,7,2,8,9,10,100,11,2,200,10]
+#function calling
+result=check_odd_ind(org_list=testList)
+#finally print result
+print("Final Result is :: {} ".format(result))
+--------------------
+'''3. Write a function to take a list as an argument. Find all the elements that occur in EVEN indexes &
+   remove all duplicates.
+    Example : 
+        org_list=[1,2,300,4,5,6,7,2,8,9,10,100,11,2,200,10,300]
+        result=func_exec(org_list)
+        print(result)
+        Expected Output : [1,300,5,7,8,19,11,200]
+        :param orgList: Original list passed by the User
+        :return: EVEN indexes from list ONLY'''
+
+#This function gives new list with even index elements from original list
+def check_eve_ind(org_list):
+
+  #define new empty list
+  new_mapper=[] 
+  #loop i value contains even numbers and step number is 2
+  for i in range(0,len(org_list),2):
+    )#even index elements from original list is adds to new list
+    new_mapper.append(org_list[i]
+  #finally returns new list  
+  return new_mapper 
+
+# Execution
+testList=[1,2,300,4,5,6,7,2,8,9,10,100,11,2,200,10]
+# function calling
+result=check_eve_ind(org_list=testList)
+# finally print the result
+print("Final Result is :: {} ".format(result))
+------------------------------------------
+'''4. Write a function to take a dict and number X arguments. 
+If the dict key is divisible by number X, then
+   add the key to new dict and return the new dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            numX=10
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {10:20,60:11}
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            numX=101
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {}
+             :param orgList: Original dictionary passed by the User
+             :param numX: Number X passed by the User. Type is INT.
+             :return: New dictionary with filtered values ONLY.'''
+
+#This function gives a new dictionary with key-value pair which the keys from original dictionary is divisible by value x entered by the user
+def check_div(org_dic,numx):#function defined
+    
+    #define new empty dictionary
+    new_mapper={}
+    
+    #items method gives list of tuples from dictionary
+    # iterates keys and  values from original dictionary
+    for _key,_value in org_dic.items():
+        #checking for is key divisible with value numx , if condition true the key and value is added to the new dictionary
+        if (_key%numx==0):
+            #adding key-value pair to new dictionary
+            new_mapper[_key]=_value
+    #finally return new dictionary        
+    return new_mapper
+    
+
+# Execution
+testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+numx=10
+#function calling
+result=check_div(org_dic=testDict,numx=numx)
+#finally print the result
+print("Final Result is :: {} ".format(result))
+---------------------------------
+'''4. Write a function to take a dict and number X arguments. 
+If the dict key is divisible by number X, then
+   add the key to new dict and return the new dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            numX=10
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {10:20,60:11}
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            numX=101
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {}
+             :param orgList: Original dictionary passed by the User
+             :param numX: Number X passed by the User. Type is INT.
+             :return: New dictionary with filtered values ONLY.'''
+
+#This function gives a new dictionary with key-value pair which the keys from original dictionary is divisible by value x entered by the user
+def check_div(org_dic,numx):#function defined
+    
+    #define new empty dictionary
+    new_mapper={}
+    
+    #items method gives list of tuples from dictionary
+    # iterates keys and  values from original dictionary
+    for _key,_value in org_dic.items():
+        #checking for is key divisible with value numx , if condition true the key and value is added to the new dictionary
+        if (_key%numx==0):
+            #adding key-value pair to new dictionary
+            new_mapper[_key]=_value
+    #finally return new dictionary        
+    return new_mapper
+    
+
+# Execution
+testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+numx=10
+#function calling
+result=check_div(org_dic=testDict,numx=numx)
+#finally print the result
+print("Final Result is :: {} ".format(result))
+-----------------------------------------'''5. Write a function to take a dict and number X arguments. If the dict key is NOT divisible by number X, then
+   add the key to new dict and finally return the new dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            numX=10
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {1:4,3:4,4:7,12:9}
+    Example : 
+            testDict={1:4,101:20,130:4,41:7,601:11,120:9}
+            numX=5
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {1:4,101:20,41:7,601:11}
+    Example : 
+            testDict={1:4,101:20,130:4,41:7,601:11,120:9}
+            numX=1
+            result=func_exec(testDict,numX)
+            print(result)
+            Expected Output : {}
+            :param orgDict: Original dictionary passed by the User
+            :param numX: Number X passed by the User. Type is INT.
+            :return: New dictionary with filtered values ONLY.'''
+
+#This function gives a new dictionary with key-value pair which the keys from original dictionary is not divisible by value x entered by the user
+def check_not_div(org_dic,numx):
+    
+    #difine an empty dictionary
+    new_mapper={} 
+    
+    #items method gives list of tuples from dictionary
+    # iterates keys and values from original dictionary
+    for _key,_value in org_dic.items():
+        #checking for is key not divisible with value numx , if condition true the key and value is added to the new dictionary
+        if (_key%numx!=0):
+            #adding key-value pair to new dictionary
+            new_mapper[_key]=_value
+    #finally returns new dictionary        
+    return new_mapper 
+    
+
+# Execution
+testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+numx=10
+#function calling
+result=check_not_div(org_dic=testDict,numx=numx)
+#finally print the result
+print("Final Result is :: {} ".format(result))
+
+---------------------
+'''6. Write a function to take 2 lists. Iterate both the lists, if the elements in both the lists match then add it to new list.
+   From that list select all elements in ODD indexes.Finally return the new list. The new list must not contain duplicates.
+    Example :
+        org_listA=[10,20,30,40,50,60,100]
+        org_listB=[10,200,30,40,500,60,100,400,90]
+        result=func_exec(org_listA,org_listB)
+        print(result)
+        Expected Output : [30,100]
+    Example :
+        org_listA=[10,20,30,40,50,60,100]
+        org_listB=[101,2001,130,140,1500,610,1100,4001,190,901]
+        result=func_exec(org_listA,org_listB)
+        print(result)
+        Expected Output : []
+        :param org_list: Original list(org_listA,org_listB) passed by the User
+        :return: New list with filtered values ONLY'''
+
+def check_mat(org_listA,org_listB):
+    #define an empty list
+    match_list=[]
+    #define an empty list
+    final_list=[]
+    #iterates 2 different list Simantanously using zip
+    for (_key,_value) in zip(org_listA,org_listB):
+            #checking for elements from both lists are equal if condition true element adds to new empty list
+            if (_key==_value):
+                #add element to new list
+                match_list.append(_key)    
+    
+    #checking for duplicates 
+    # loop is value contains even numbers                  
+    for _key in range(1,len(match_list),2): 
+        #checking for an element is not present already in new list if condition true an element is adds to new list
+        if (_key not in final_list):
+            #adding elements to new list
+            final_list.append(match_list[_key])
+    #finally return list without duplicates        
+    return final_list
+
+# Execution
+testListA=[10,20,30,40,50,60,100]
+testListB=[10,200,30,40,500,60,100,400,90]
+#function calling
+result=check_mat(org_listA=testListA,org_listB=testListB)
+#finally print result
+print("Final Result is :: {} ".format(result))
+--------------------------------------------
+------------------------------------
+set-5
+******
+'''1. Write a function to take a list. Reverse and return the new list.
+    Example :
+        listA=[10,20,30,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [100,60,50,40,30,20,10]
+        :param org_dict: Original dictionary passed by the User
+'''
+# function define the reverse the list
+def reverse_list(org_list):
+
+  # define empty list
+  new_mapper = [] 
+  # itearate the orginal list
+  for i in reversed(org_list): 
+    # add elements in to new list
+    new_mapper.append(i) 
+  # finally return the new list
+  return new_mapper 
+
+# Execution
+testList=[10,20,30,40,50,60,100]
+#function calling
+result=reverse_list(org_list=testList)
+# print the result
+print("Final Result is :: {} ".format(result))
+---------------------------------
+'''2. Write a function to take a list. Sort and return the new list.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        result=func_exec(listA)
+        print(result)
+        Expected Output : [20,40,50,60,100,100,300]
+        :param org_list: Original list passed by the User
+        :return: New list with filtered values ONLY'''   
+
+#This function gives a new sorted list
+def check_sort(org_list):
+
+    #define new list
+    new_mapper=[]
+    # sort the orginal list as listA
+    for i in sorted(org_list):
+        #adds to new list
+        new_mapper.append(i)
+    #Finally return new sorted list           
+    return new_mapper
+    
+# Execution
+testList=[100,20,300,40,50,60,100]
+#Calling function
+result=check_sort(org_list=testList)
+#output final result
+print("Final Result is :: {} ".format(result))
+
+------------------------------
+'''3. Write a function to take 2 lists. Use zip function to iterate the list and pick values that
+   are common at both indexes.
+    Example :
+        listA=[100,20,300,40,50,60,100]
+        listB=[1100,20,1300,40,50,160,1000]
+        result=func_exec(listA,listB)
+        print(result)
+        # 20 -> listA[1] == listB[1]
+        # 40 -> listA[3] == listB[3]
+        # 50 -> listA[4] == listB[4]
+        Expected Output : [20,40,50]
+        :param org_list: Original list(org_listA, org_listB) passed by the User
+        :return: New list with filtered values ONLY'''   
+        
+# function gives comman elements in listA and listB
+def check_list(org_listA, org_listB):  
+
+    #define empty list
+    new_mapper=[]
+    #iterates 2 list Simanatanously using the zip
+    for listA_var, listB_var in zip(org_listA, org_listB):
+            #checking for both the elements from 2 lists are equal if condition true element adds to    new_mapper
+            if(listA_var==listB_var):
+                    #adding element to new list
+                    new_mapper.append(listA_var)
+    #finally return the new list        
+    return  new_mapper
+    
+# Execution
+testListA=[100,20,300,40,50,60,100]
+testListB=[1100,20,1300,40,50,160,1000]
+#function calling
+result=check_list(org_listA=testListA,org_listB=testListB)
+#print result
+print("Final Result is :: {} ".format(result))
+
+--------------------------
+'''4. Write a function to take a dict as argument. Sort the dict by keys and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,3:4,4:7,12:9,20:3,60:11}
+            :param org_dic: Original dictionary passed by the User
+            :return: New dic with filtered values ONLY'''
+
+#This function returns new sorted dictionary
+def check_sort(org_dic):
+
+    #define empty dictionary
+    new_mapper={}    
+    #sorted method on dictionary gives a list with sorted keys
+    #iterates keys from least to maximum
+    for i in sorted(org_dic):
+        #adds key-value pair to new dictionary
+        new_mapper[i]=org_dic[i]
+    #finally return the new dic    
+    return new_mapper
+
+
+# Execution
+testDict={1:4,10:20,3:4,4:7,60:11,12:9}
+#function calling
+result=check_sort(orgDictsort=testDict)
+#finally print result
+print("Final Result is :: {} ".format(result))
+--------------------------------------
+'''5. Write a function to take a dict as argument. Sort the dict by values and return the dict.
+    Example : 
+            testDict={1:4,10:20,3:40,4:7,60:11,12:9}
+            result=func_exec(testDict)
+            print(result)
+            Expected Output : {1:4,4:7,12:9,60:11,10:20,3:40}
+            :param org_dic: Original dictionary passed by the User
+            :return: New dic with filtered values ONLY'''
+
+#This function returns new sorted dictionary by values
+def sort_value(org_dic):
+    
+    #define empty dictionary
+    new_mapper={}
+    #values() method gives list of values
+    #stores sorted list of values
+    _val=sorted(org_dic.values()) 
+    #iterates values one by one
+    for _key in _val:    
+        #iterates keys from original dict one by one
+        for _val in org_dic: 
+            #checking for values and keys if condition true it adds to new dict. 
+            if(_key==org_dic[_val]):   
+                #add key-value pair to new dictionary
+                new_mapper[_val]=_key  
+    # finally return the new dic                         
+    return new_mapper               
+
+# Execution
+testDict={1:4,10:20,3:40,4:7,60:11,12:9}
+#function calling
+result=sort_value(org_dic=testDict)
+#finally print result
+print("Final Result is :: {} ".format(result))
+

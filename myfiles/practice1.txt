@@ -1,0 +1,29 @@
+# What Is Kubernetes RBAC?
+
+# RBAC is an authorization mechanism that enables fine-grained access for users and applications interacting with Kubernetes   objects in a cluster
+# With RBAC, cluster admins can specify application access, add/remove permissions, and limit resource visibility depending   upon their role in a hierarchy.
+# A role can represent a set of permissions on certain API objects, like pods, nodes, deployments, and ConfigMaps, and   identify actions on them by users and processes through API groups.
+
+
+# How Does RBAC Work?
+
+# There are three major elements involved in RBAC
+
+# 1.Subjects:
+# They are divided into three categories: users, groups, and service accounts
+# Users and Groups: these subjects are not stored in the Kubernetes database and are meant for processes outside the cluster.
+# ServiceAccounts: these subjects exist as API objects in the Kubernetes cluster and are used for intracluster processes.
+
+# 2.Verbs
+# The operations executed on available Deployments, Services, and Pods in a Kubernetes cluster are called verbs.
+# Examples are Create, Read, Update, or Delete operations
+
+# 3.Resources
+# These are the available API objects in a Kubernetes cluster, such as Deployments, Services, Pods, and PersistentVolumes. # Rules on these API objects are expressed as ClusterRoles/Roles that can be defined as Kubernetes subjects
+
+# Service account:
+ -  It is used to authenticate  get access to our Kubernetes cluster.
+ -  identity to your Pods
+ -  within the pod can access the cluster by getting authenticated by the API server, using a service account.
+ -  When you are done creating a service account, a service account token also gets
+

@@ -1,0 +1,81 @@
+
+# SECTION 11 :     
+
+        # Kubernetes agents can access local persistent storage
+        
+        STEP 1 :
+            - Kubernetes supports many types of storage class and volumes
+            - In this scenario we can use the NFS storage class
+
+            # create storageclass
+                kubectl apply -f storage.yml -n <<namespace>>
+
+            # get sc
+                kubectl get sc
+
+            # describe sc
+                kubectl describe sc
+
+            # delete sc
+                kubectl delete sc <<scname>> -n <<namespace>>
+
+        STEP 2 :
+            - Create a hostPath PersistentVolume
+            - In this section, we'll create a hostPath PersistentVolume
+            - Kubernetes supports hostPath for development and testing on a single-node cluster
+            - A hostPath PersistentVolume uses a file or directory on the Node to attached storage
+            - Here is the configuration file for the hostPath PersistentVolume pv.yml
+
+            # create pv
+                kubectl apply -f pv.yml -n <<namespace>>
+
+            # get pv
+                kubectl get pv
+
+            # describe pv
+                kubectl describe pv vude-pv
+
+            # delete pv 
+                kubectl delete pv vude-pv -n <<namespace>>
+
+        STEP 3 :
+            - Create a PersistentVolumeClaim
+            - Pods use PersistentVolumeClaims to request physical storage
+            - In this section, we create a PersistentVolumeClaim that requests a volume of at least
+              three gibibytes that can provide read-write access for at least one Node.
+            - Here is the configuration file for the hostPath PersistentVolumeClaim pvc.yml  
+
+            # create pvc
+                kubectl apply -f pvc.yml -n <<namespace>>
+
+            # get pvc
+                kubectl get pvc -n <<namespace>>
+
+            # describe pvc
+                kubectl describe pvc vude-pvc -n <<namespace>>
+
+            # delete pvc
+                kubectl delete pvc vude-pvc -n <<namespace>>
+
+            - After we created the PersistentVolumeClaim, If the control plane finds a suitable PersistentVolume
+              with the same StorageClass, it binds the claim to the volume.  
+
+        STEP 4 :   
+            - Create a Pod uses PersistentVolumeClaim as a volume
+            - Now it's time to create a Pod that uses our PersistentVolumeClaim as a volume.
+            - To configuration file for the Pod looks like this pv-pod.yml
+
+            # create pod
+            kubectl apply -f pod.yml -n <<namespace>>
+
+            # get pods
+            kubectl get pods pod.yml -n <<namespace>>
+
+            # describe pod
+            kubectl describe pod pod.yml -n <<namespace>>
+
+            # delete pod
+            kubectl delete pod pod.yml -n <<namespace>>
+
+            # edit pod
+            kubectl edit pod pod.yml -n <<namespace>>

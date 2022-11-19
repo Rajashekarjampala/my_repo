@@ -1,0 +1,16 @@
+deployment:
+#configaration about your no.of replicas, image name, resources, like cpu, ram, storage
+#deployment is manage the pod
+#we will create the no.of pods in sigle deploymet by using give the replica number
+
+
+
+pod(repica):-
+#pod is a logical virtual machine
+#insisde the pod container is running
+#single pod single node is recomanded way
+#single node we create the multiple pods
+
+
+
+

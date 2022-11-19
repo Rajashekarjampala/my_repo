@@ -1,0 +1,36 @@
+ # What is exactly glusterFS is .....?
+ 
+ * Yeah.. Actually glusterFS is an open source file system.
+ * It is used for storage for large scale files
+ * And gllusterFS is also like NFS. it is different from standard file system so that really devolops and produces speed 
+   of file recommandation
+   and it get the very quickly and delivered for the applications or to our user
+ * Yeah.moreover it advantages is any applications thats need access a file quickly and delivered it to user or our application
+   and its faster than our relative file systems like NFS
+  
+
+ # Then coming to GlusterFS installation
+ 
+ * We have install on glusterFS package on centos or ubuntu based on our requirement
+ * Then we start our glusterFS application 
+ * Again we have install glusterFS in all the nodes and including client machine
+ * Then we have to group them. like we can open the created host file like vi /etc/hosts 
+ * And then we can add our node ip address 
+ * And its reapeted to remaining worker nodes and client machine also. these nodes are talk to each other.i mean it communicate 
+   with each other
+ * Then now we make sure need to they form single storage pool 
+ * Then we check the glusterFS peer status
+
+
+ # Replicated volume creation and volume mount
+
+ * Then we make directory in worker nodes and then we create a volume for glusterFS volume create
+ * Then we need to check the replicated volume is created or not... by using command of "gluster volume info" 
+ * Then start and check the gluster volume status
+ * Then create directory for mount a volume in client machine
+ * then go to mount volume under this derectory.... by using command of " mount -t glusterFS <ourworkernode>:<volumename> 
+   <clientmachinevolumedirectory> "
+ * then we have to change directory to client machine volume directory 
+ * For example to know our file is shared or not. testing purpose I Have a file creating this folder. automatically its created 
+   file in all worker nodes
+ 

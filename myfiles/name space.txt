@@ -1,0 +1,19 @@
+
+
+
+
+kubectl get namespaces
+kubectl create namespace
+kubectl get namespaces <name>
+kubectl describe namespaces <name>
+kubectl config set-context --current --namespace=my-namespace
+# Validate it
+kubectl config view --minify | grep namespace:
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: <insert-namespace-name-here>
+
+  kubectl apply -f pod.yaml --namespace=test

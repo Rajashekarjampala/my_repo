@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vude-pod
+  namespace: rjamapax
+spec:
+  volumes:
+    - name: vude-nginx-pv-storage
+      persistentVolumeClaim:
+        claimName: vude-pvc
+  containers:
+    - name: vude-nfs-tests-nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "vude-nfs-nginx"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: vude-nginx-pv-storage
+
